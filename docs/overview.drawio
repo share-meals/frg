@@ -1,0 +1,37 @@
+<mxfile host="Electron" modified="2024-12-09T00:23:30.779Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="alBOrIZu_0TjdNi_w30W" version="22.0.3" type="device">
+  <diagram name="Page-1" id="meAQh50mIC9DnXSjfXPz">
+    <mxGraphModel dx="1349" dy="1381" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="K0ohj7xhBHkrysFTaULI-5" value="snapshot&lt;br&gt;&lt;i&gt;build and distribute human readable artifacts&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="330" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-1" value="d7 - Database&lt;br&gt;&lt;i&gt;single source of truth for all data in the system&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="120" y="200" width="330" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-2" value="d7_postgres&lt;br&gt;&lt;i&gt;db&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="290" y="250" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-3" value="d7_directus&lt;br&gt;&lt;i&gt;ui for db management&lt;br&gt;publishing workflows&lt;br&gt;&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="130" y="250" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-4" value="AWS S3&lt;br&gt;&lt;i&gt;stores html guides for public access&lt;br&gt;&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="130" y="410" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-6" value="Libretranslate&lt;br&gt;&lt;i&gt;text translation service&lt;br&gt;&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="710" y="680" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-8" value="mq - message queue&lt;br&gt;&lt;i&gt;intra service messaging&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="200" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-9" value="mq_redis&lt;br&gt;&lt;i&gt;db&lt;br&gt;&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="690" y="250" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K0ohj7xhBHkrysFTaULI-10" value="mq_bullboard&lt;br&gt;&lt;i&gt;ui&lt;br&gt;&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="850" y="250" width="150" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

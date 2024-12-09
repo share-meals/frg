@@ -1,0 +1,68 @@
+version: "3"
+services:
+  d7_postgres:
+    environment:
+      POSTGRES_DB: ${D7_POSTGRES_DB}
+      POSTGRES_PASSWORD: ${D7_POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${D7_POSTGRES_PORT}
+      POSTGRES_USER: ${D7_POSTGRES_USER}
+    healthcheck:
+      interval: 5s
+      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U directus"]
+      timeout: 5s
+    image: postgis/postgis:13-3.4-alpine
+    networks:
+      - frg-network
+    platform: linux/amd64
+    ports:
+      - "${D7_POSTGRES_PORT}:5432"
+    volumes:
+      - ../data/d7_postgres/config:/db_config
+      - ../data/d7_postgres/data:/var/lib/postgresql/data
+      - ../data/d7_postgres/init:/docker-entrypoint-initb.d
+
+  d7_directus:
+    depends_on:
+      # - d7_cache
+      d7_postgres:
+        condition: service_healthy
+    environment:
+      ADMIN_EMAIL: ${D7_DIRECTUS_EMAIL}
+      ADMIN_PASSWORD: ${D7_DIRECTUS_PASSWORD}
+      #AUTH_PROVIDERS: keycloak
+      AUTH_KEYCLOAK_CLIENT_ID: ${AUTH_KEYCLOAK_CLIENT_ID}
+      AUTH_KEYCLOAK_CLIENT_SECRET: ${AUTH_KEYCLOAK_CLIENT_SECRET}
+      AUTH_KEYCLOAK_DRIVER: "openid"
+      AUTH_KEYCLOAK_IDENTIFIER_KEY: "email"
+      AUTH_KEYCLOAK_ISSUER_URL: ${AUTH_KEYCLOAK_ISSUER_URL}
+      AWS_S3_REGION: ${D7_DIRECTUS_AWS_S3_REGION}
+      AWS_S3_ACCESS_KEY_ID: ${D7_DIRECTUS_AWS_S3_KEY_ID}
+      AWS_S3_SECRET_ACCESS_KEY: ${D7_DIRECTUS_AWS_S3_ACCESS_KEY}
+      DB_CLIENT: "pg"
+      DB_DATABASE: ${D7_POSTGRES_DB}
+      DB_HOST: d7_postgres
+      DB_USER: ${D7_POSTGRES_USER}
+      DB_PASSWORD: ${D7_POSTGRES_PASSWORD}
+      DB_PORT: 5432
+      EXTENSIONS_AUTO_RELOAD: "true" # only for extensions development
+      IMPORT_IP_DENY_LIST: ${D7_DIRECTUS_IMPORT_IP_DENY_LIST}
+      KEY: ${D7_DIRECTUS_KEY}
+      PUBLIC_URL: ${D7_DIRECTUS_PUBLIC_URL}
+      SECRET: ${D7_DIRECTUS_SECRET}
+      WEBSOCKETS_ENABLED: "true"
+      # CACHE_ENABLED: "true"
+      # CACHE_STORE: "redis"
+      # REDIS: "redis://cache:6379"
+    image: directus/directus:10.10.5
+    networks:
+      - frg-network
+    ports:
+      - "${D7_DIRECTUS_PORT}:8055"
+    volumes:
+      - ../data/d7_directus/uploads:/directus/uploads
+      - ../data/d7_directus/extensions:/directus/extensions
+
+networks:
+  frg-network:
+    driver: bridge
