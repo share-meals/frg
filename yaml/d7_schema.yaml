@@ -1,0 +1,3830 @@
+version: 1
+directus: 10.10.5
+vendor: postgres
+collections:
+  - collection: communities
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: communities
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: communities
+  - collection: farmersMarkets
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: farmersMarkets
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: farmersMarkets
+  - collection: foodPantries
+    meta:
+      accountability: all
+      archive_app_filter: false
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: foodPantries
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: food_bank
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: foodPantries
+  - collection: retailFoodStores
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: retailFoodStores
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: storefront
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: true
+    schema:
+      name: retailFoodStores
+  - collection: socialServices
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: socialServices
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: handshake
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: true
+    schema:
+      name: socialServices
+  - collection: templates
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: archived
+      collapse: open
+      collection: templates
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: draft
+      versioning: false
+    schema:
+      name: templates
+fields:
+  - collection: communities
+    field: id
+    type: uuid
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: communities
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: userUpdated
+    type: uuid
+    meta:
+      collection: communities
+      conditions: null
+      display: user
+      display_options: null
+      field: userUpdated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 2
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: userUpdated
+      table: communities
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: communities
+    field: dateUpdated
+    type: timestamp
+    meta:
+      collection: communities
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: dateUpdated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 3
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: dateUpdated
+      table: communities
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: name
+    type: string
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: communities
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: ntaCode
+    type: string
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: ntaCode
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: ntaCode
+      table: communities
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: boroCode
+    type: string
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: boroCode
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: boroCode
+      table: communities
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: boroName
+    type: string
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: boroName
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: boroName
+      table: communities
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: countyFips
+    type: string
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: countyFips
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: countyFips
+      table: communities
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: geometry
+    type: geometry.MultiPolygon
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: geometry
+      group: null
+      hidden: false
+      interface: map
+      note: null
+      options:
+        defaultView:
+          bearing: 0
+          center:
+            lat: 0
+            lng: 0
+          pitch: 0
+          zoom: 0
+        geometryType: MultiPolygon
+      readonly: false
+      required: false
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: geometry
+      table: communities
+      data_type: MULTIPOLYGON
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: communities
+    field: translationTargets
+    type: json
+    meta:
+      collection: communities
+      conditions: null
+      display: null
+      display_options: null
+      field: translationTargets
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: null
+      options:
+        choices:
+          - text: Albanian
+            value: sq
+          - text: Arabic
+            value: ar
+          - text: Azerbaijani
+            value: az
+          - text: Bengali
+            value: bn
+          - text: Bulgarian
+            value: bg
+          - text: Catalan
+            value: ca
+          - text: Chinese
+            value: zh
+          - text: Czech
+            value: cs
+          - text: Danish
+            value: da
+          - text: Dutch
+            value: nl
+          - text: Estonian
+            value: et
+          - text: Finnish
+            value: fi
+          - text: French
+            value: fr
+          - text: German
+            value: de
+          - text: Greek
+            value: el
+          - text: Hebrew
+            value: he
+          - text: Hindi
+            value: hi
+          - text: Hungarian
+            value: hu
+          - text: Indonesian
+            value: id
+          - text: Irish
+            value: ga
+          - text: Italian
+            value: it
+          - text: Japanese
+            value: ja
+          - text: Korean
+            value: ko
+          - text: Latvian
+            value: lv
+          - text: Lithuanian
+            value: lt
+          - text: Malay
+            value: ms
+          - text: Norwegian
+            value: nb
+          - text: Persian
+            value: fa
+          - text: Polish
+            value: pl
+          - text: Portuguese
+            value: pt
+          - text: Romanian
+            value: ro
+          - text: Russian
+            value: ru
+          - text: Serbian
+            value: sr
+          - text: Slovak
+            value: sk
+          - text: Slovenian
+            value: sl
+          - text: Spanish
+            value: es
+          - text: Swedish
+            value: sv
+          - text: Tagalog
+            value: tl
+          - text: Thai
+            value: th
+          - text: Turkish
+            value: tr
+          - text: Ukrainian
+            value: uk
+          - text: Urdu
+            value: ur
+          - text: Vietnamese
+            value: vi
+      readonly: false
+      required: false
+      sort: 10
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: translationTargets
+      table: communities
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: id
+    type: uuid
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: farmersMarkets
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: name
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: streetAddress
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: streetAddress
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: streetAddress
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: addressLocality
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: addressLocality
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressLocality
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: addressRegion
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: addressRegion
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressRegion
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: postalCode
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: postalCode
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: postalCode
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: addressCountry
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: addressCountry
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressCountry
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: geolocation
+    type: geometry.Point
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: geolocation
+      group: null
+      hidden: false
+      interface: map
+      note: null
+      options:
+        defaultView:
+          bearing: 0
+          center:
+            lat: 0
+            lng: 0
+          pitch: 0
+          zoom: 0
+        geometryType: Point
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: geolocation
+      table: farmersMarkets
+      data_type: POINT
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: website
+    type: string
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: website
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: website
+      table: farmersMarkets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: lastVerified
+    type: dateTime
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: lastVerified
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options:
+        use24: false
+      readonly: false
+      required: false
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: lastVerified
+      table: farmersMarkets
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: farmersMarkets
+    field: hours
+    type: json
+    meta:
+      collection: farmersMarkets
+      conditions: null
+      display: null
+      display_options: null
+      field: hours
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        addLabel: Create New
+        fields:
+          - field: days
+            name: days
+            type: json
+            meta:
+              field: days
+              type: json
+              interface: select-multiple-checkbox
+              options:
+                choices:
+                  - text: Monday
+                    value: Mo
+                  - text: Tuesday
+                    value: Tu
+                  - text: Wednesday
+                    value: We
+                  - text: Thursday
+                    value: Th
+                  - text: Friday
+                    value: Fr
+                  - text: Saturday
+                    value: Sa
+                  - text: Sunday
+                    value: Su
+                itemsShown: 7
+              display: null
+          - field: timeStart
+            name: timeStart
+            type: time
+            meta:
+              field: timeStart
+              width: half
+              type: time
+              interface: datetime
+              options:
+                use24: false
+          - field: timeEnd
+            name: timeEnd
+            type: time
+            meta:
+              field: timeEnd
+              width: half
+              type: time
+              interface: datetime
+              options:
+                use24: false
+          - field: notes
+            name: notes
+            type: text
+            meta:
+              field: notes
+              width: full
+              type: text
+              interface: input-rich-text-md
+              options:
+                toolbar:
+                  - heading
+                  - bold
+                  - italic
+                  - strikethrough
+                  - blockquote
+                  - bullist
+                  - numlist
+                  - table
+                  - link
+                  - empty
+                editorFont: monospace
+        template: '{{ days }} {{timeStart}}-{{timeEnd}}'
+      readonly: false
+      required: false
+      sort: 12
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: hours
+      table: farmersMarkets
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: id
+    type: uuid
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: foodPantries
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: name
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: status
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            color: var(--theme--primary)
+            foreground: var(--theme--primary)
+            background: var(--theme--primary-background)
+          - text: $t:draft
+            value: draft
+            color: var(--theme--foreground)
+            foreground: var(--theme--foreground)
+            background: var(--theme--background-normal)
+          - text: $t:archived
+            value: archived
+            color: var(--theme--warning)
+            foreground: var(--theme--warning)
+            background: var(--theme--warning-background)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: Open
+            value: open
+          - text: Closed
+            value: closed
+          - text: Closed - Temporary
+            value: closed_temporary
+          - text: Unknown
+            value: unknown
+      readonly: false
+      required: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: notes
+    type: text
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: notes
+      group: null
+      hidden: false
+      interface: input-rich-text-md
+      note: null
+      options:
+        alphabetize: true
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: notes
+      table: foodPantries
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: streetAddress
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: streetAddress
+      group: null
+      hidden: false
+      interface: null
+      note: null
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: streetAddress
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: addressLocality
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: addressLocality
+      group: null
+      hidden: false
+      interface: input
+      note: City
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressLocality
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: addressRegion
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: addressRegion
+      group: null
+      hidden: false
+      interface: input
+      note: State
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressRegion
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: postalCode
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: postalCode
+      group: null
+      hidden: false
+      interface: input
+      note: Zipcode
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: postalCode
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: addressCountry
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: addressCountry
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressCountry
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: hours
+    type: json
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: hours
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        addLabel: Create New
+        fields:
+          - field: days
+            name: days
+            type: json
+            meta:
+              field: days
+              type: json
+              interface: select-multiple-checkbox
+              options:
+                choices:
+                  - text: Monday
+                    value: Mo
+                  - text: Tuesday
+                    value: Tu
+                  - text: Wednesday
+                    value: We
+                  - text: Thursday
+                    value: Th
+                  - text: Friday
+                    value: Fr
+                  - text: Saturday
+                    value: Sa
+                  - text: Sunday
+                    value: Su
+                itemsShown: 7
+              display: null
+          - field: timeStart
+            name: timeStart
+            type: time
+            meta:
+              field: timeStart
+              width: half
+              type: time
+              interface: datetime
+              options:
+                use24: false
+          - field: timeEnd
+            name: timeEnd
+            type: time
+            meta:
+              field: timeEnd
+              width: half
+              type: time
+              interface: datetime
+              options:
+                use24: false
+          - field: notes
+            name: notes
+            type: text
+            meta:
+              field: notes
+              width: full
+              type: text
+              interface: input-rich-text-md
+              options:
+                toolbar:
+                  - heading
+                  - bold
+                  - italic
+                  - strikethrough
+                  - blockquote
+                  - bullist
+                  - numlist
+                  - table
+                  - link
+                  - empty
+                editorFont: monospace
+        template: '{{ days }} {{timeStart}}-{{timeEnd}}'
+      readonly: false
+      required: false
+      sort: 12
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: hours
+      table: foodPantries
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: phoneNumbers
+    type: json
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: phoneNumbers
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: phoneNumber
+            name: phoneNumber
+            type: string
+            meta:
+              field: phoneNumber
+              type: string
+              interface: input
+              options:
+                trim: true
+          - field: isPrivate
+            name: isPrivate
+            type: boolean
+            meta:
+              field: isPrivate
+              type: boolean
+              interface: boolean
+              required: false
+              options:
+                label: Private
+              display: null
+          - field: notes
+            name: notes
+            type: string
+            meta:
+              field: notes
+              type: string
+              interface: input
+              options:
+                trim: true
+        template: '{{phoneNumber}}'
+      readonly: false
+      required: false
+      sort: 13
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: phoneNumbers
+      table: foodPantries
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: emailAddresses
+    type: json
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: emailAddresses
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: email
+            name: email
+            type: string
+            meta:
+              field: email
+              type: string
+              required: false
+              interface: input
+              options:
+                iconLeft: null
+                trim: true
+          - field: isPrivate
+            name: isPrivate
+            type: boolean
+            meta:
+              field: isPrivate
+              type: boolean
+              interface: boolean
+              options:
+                label: Private
+              display: null
+          - field: notes
+            name: notes
+            type: string
+            meta:
+              field: notes
+              type: string
+              interface: input
+      readonly: false
+      required: false
+      sort: 14
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: emailAddresses
+      table: foodPantries
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: website
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: website
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 15
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: website
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: idRequired
+    type: boolean
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: idRequired
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options:
+        label: Required
+      readonly: false
+      required: true
+      sort: 16
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: idRequired
+      table: foodPantries
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: dietaryAccomodations
+    type: json
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: dietaryAccomodations
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: null
+      options:
+        choices:
+          - text: Halal
+            value: halal
+          - text: Kosher
+            value: kosher
+        itemsShown: 2
+      readonly: false
+      required: false
+      sort: 17
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: dietaryAccomodations
+      table: foodPantries
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: externalIds
+    type: json
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: externalIds
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: agency
+            name: agency
+            type: string
+            meta:
+              field: agency
+              width: half
+              type: string
+              required: true
+              interface: input
+              options:
+                trim: true
+          - field: id
+            name: id
+            type: string
+            meta:
+              field: id
+              width: half
+              type: string
+              required: true
+              interface: input
+              options:
+                trim: true
+        sort: agency
+        template: '{{agency}}'
+      readonly: false
+      required: false
+      sort: 18
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: externalIds
+      table: foodPantries
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: geolocation
+    type: geometry.Point
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: geolocation
+      group: null
+      hidden: false
+      interface: map
+      note: null
+      options:
+        defaultView:
+          bearing: 0
+          center:
+            lat: -37.718592344657274
+            lng: 97.54922739369954
+          pitch: 0
+          zoom: 0
+        geometryType: Point
+      readonly: false
+      required: false
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: geolocation
+      table: foodPantries
+      data_type: POINT
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: lastVerified
+    type: dateTime
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: lastVerified
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options:
+        use24: false
+      readonly: false
+      required: false
+      sort: 19
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: lastVerified
+      table: foodPantries
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: foodPantries
+    field: type
+    type: string
+    meta:
+      collection: foodPantries
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: Food Pantry
+            value: foodPantry
+          - text: Soup Kitchen
+            value: soupKitchen
+          - text: Mobile Food Pantry
+            value: mobileFoodPantry
+          - text: Mobile Soup Kitchen
+            value: mobileSoupKitchen
+          - text: Mobile Market
+            value: mobileMarket
+      readonly: false
+      required: false
+      sort: 20
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: type
+      table: foodPantries
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: id
+    type: uuid
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retailFoodStores
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: name
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: phoneNumbers
+    type: json
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: phoneNumbers
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: phoneNumber
+            name: phoneNumber
+            type: string
+            meta:
+              field: phoneNumber
+              type: string
+              interface: input
+              options:
+                trim: true
+          - field: isPrivate
+            name: isPrivate
+            type: boolean
+            meta:
+              field: isPrivate
+              type: boolean
+              interface: boolean
+              required: false
+              options:
+                label: Private
+              display: null
+          - field: notes
+            name: notes
+            type: string
+            meta:
+              field: notes
+              type: string
+              interface: input
+              options:
+                trim: true
+        template: '{{phoneNumber}}'
+      readonly: false
+      required: false
+      sort: 4
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: phoneNumbers
+      table: retailFoodStores
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: streetAddress
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: streetAddress
+      group: null
+      hidden: false
+      interface: null
+      note: null
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: streetAddress
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: addressLocality
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: addressLocality
+      group: null
+      hidden: false
+      interface: input
+      note: City
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressLocality
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: addressRegion
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: addressRegion
+      group: null
+      hidden: false
+      interface: input
+      note: State
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressRegion
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: postalCode
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: postalCode
+      group: null
+      hidden: false
+      interface: input
+      note: Zipcode
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: postalCode
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: addressCountry
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: addressCountry
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressCountry
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: hours
+    type: json
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: hours
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        addLabel: Create New
+        fields:
+          - field: days
+            name: days
+            type: json
+            meta:
+              field: days
+              type: json
+              interface: select-multiple-checkbox
+              options:
+                choices:
+                  - text: Monday
+                    value: Mo
+                  - text: Tuesday
+                    value: Tu
+                  - text: Wednesday
+                    value: We
+                  - text: Thursday
+                    value: Th
+                  - text: Friday
+                    value: Fr
+                  - text: Saturday
+                    value: Sa
+                  - text: Sunday
+                    value: Su
+                itemsShown: 7
+              display: null
+          - field: timeStart
+            name: timeStart
+            type: time
+            meta:
+              field: timeStart
+              width: half
+              type: time
+              interface: datetime
+          - field: timeEnd
+            name: timeEnd
+            type: time
+            meta:
+              field: timeEnd
+              width: half
+              type: time
+              interface: datetime
+          - field: notes
+            name: notes
+            type: text
+            meta:
+              field: notes
+              width: full
+              type: text
+              interface: input-rich-text-md
+              options:
+                toolbar:
+                  - heading
+                  - bold
+                  - italic
+                  - strikethrough
+                  - blockquote
+                  - bullist
+                  - numlist
+                  - table
+                  - link
+                  - empty
+                editorFont: monospace
+        template: '{{ days }} {{timeStart}}-{{timeEnd}}'
+      readonly: false
+      required: false
+      sort: 11
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: hours
+      table: retailFoodStores
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: website
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: website
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: website
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: canDeliver
+    type: boolean
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: canDeliver
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 13
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: canDeliver
+      table: retailFoodStores
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: notes
+    type: text
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: notes
+      group: null
+      hidden: false
+      interface: input-rich-text-md
+      note: null
+      options:
+        alphabetize: true
+      readonly: false
+      required: false
+      sort: 14
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: notes
+      table: retailFoodStores
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: snapAccepted
+    type: boolean
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: snapAccepted
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 15
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: snapAccepted
+      table: retailFoodStores
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: snapNotes
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: snapNotes
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 16
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: snapNotes
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: wicAccepted
+    type: boolean
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: wicAccepted
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 17
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: wicAccepted
+      table: retailFoodStores
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: wicNotes
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: wicNotes
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 18
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: wicNotes
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: lastVerified
+    type: dateTime
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: lastVerified
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options:
+        use24: false
+      readonly: false
+      required: false
+      sort: 21
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: lastVerified
+      table: retailFoodStores
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: geolocation
+    type: geometry.Point
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: geolocation
+      group: null
+      hidden: false
+      interface: map
+      note: null
+      options:
+        defaultView:
+          bearing: 0
+          center:
+            lat: -37.718592344657274
+            lng: 97.54922739369954
+          pitch: 0
+          zoom: 0
+        geometryType: Point
+      readonly: false
+      required: false
+      sort: 22
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: geolocation
+      table: retailFoodStores
+      data_type: POINT
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: externalIds
+    type: json
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: externalIds
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: agency
+            name: agency
+            type: string
+            meta:
+              field: agency
+              width: half
+              type: string
+              required: true
+              interface: input
+              options:
+                trim: true
+          - field: id
+            name: id
+            type: string
+            meta:
+              field: id
+              width: half
+              type: string
+              required: true
+              interface: input
+              options:
+                trim: true
+        sort: agency
+        template: '{{agency}}'
+      readonly: false
+      required: false
+      sort: 23
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: externalIds
+      table: retailFoodStores
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retailFoodStores
+    field: type
+    type: string
+    meta:
+      collection: retailFoodStores
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: Grocery Store
+            value: groceryStore
+          - text: Supermarket
+            value: supermarket
+          - text: Produce Market
+            value: produceMarket
+          - text: Convenience Store
+            value: convenienceStore
+          - text: Deli
+            value: deli
+          - text: Bakery
+            value: bakery
+          - text: Farmers Market
+            value: farmersMarket
+          - text: market
+            value: Market
+      readonly: false
+      required: false
+      sort: 24
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: type
+      table: retailFoodStores
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: id
+    type: uuid
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: socialServices
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: name
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: name
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: streetAddress
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: streetAddress
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: streetAddress
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: addressLocality
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: addressLocality
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressLocality
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: addressRegion
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: addressRegion
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressRegion
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: postalCode
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: postalCode
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: postalCode
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: addressCountry
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: addressCountry
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: addressCountry
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: phoneNumbers
+    type: json
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: phoneNumbers
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: phoneNumber
+            name: phoneNumber
+            type: string
+            meta:
+              field: phoneNumber
+              type: string
+              interface: input
+              options:
+                trim: true
+          - field: isPrivate
+            name: isPrivate
+            type: boolean
+            meta:
+              field: isPrivate
+              type: boolean
+              interface: boolean
+              display: boolean
+          - field: notes
+            name: notes
+            type: string
+            meta:
+              field: notes
+              type: string
+              interface: input
+              options:
+                trim: true
+        template: '{{phoneNumber}}'
+      readonly: false
+      required: false
+      sort: 9
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: phoneNumbers
+      table: socialServices
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: emailAddresses
+    type: json
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: emailAddresses
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: email
+            name: email
+            type: string
+            meta:
+              field: email
+              type: string
+              required: false
+              interface: input
+              options:
+                iconLeft: null
+                trim: true
+          - field: isPrivate
+            name: isPrivate
+            type: boolean
+            meta:
+              field: isPrivate
+              type: boolean
+              interface: boolean
+              options:
+                label: Private
+              display: null
+          - field: notes
+            name: notes
+            type: string
+            meta:
+              field: notes
+              type: string
+              interface: input
+      readonly: false
+      required: false
+      sort: 10
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: emailAddresses
+      table: socialServices
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: website
+    type: string
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: website
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: website
+      table: socialServices
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: lastVerified
+    type: dateTime
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: lastVerified
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options:
+        use24: false
+      readonly: false
+      required: false
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: lastVerified
+      table: socialServices
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: geolocation
+    type: geometry.Point
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: geolocation
+      group: null
+      hidden: false
+      interface: map
+      note: null
+      options:
+        defaultView:
+          bearing: 0
+          center:
+            lat: -37.718592344657274
+            lng: 97.54922739369954
+          pitch: 0
+          zoom: 0
+        geometryType: Point
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: geolocation
+      table: socialServices
+      data_type: POINT
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: socialServices
+    field: tags
+    type: json
+    meta:
+      collection: socialServices
+      conditions: null
+      display: null
+      display_options: null
+      field: tags
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: null
+      options:
+        choices:
+          - text: Child Services
+            value: childServices
+          - text: Day Care Services
+            value: dayCareServices
+          - text: Disability Services
+            value: disabilityServices
+          - text: Domestic Abuse Services
+            value: domesticAbuseServices
+          - text: Educational Services
+            value: educationalServices
+          - text: Employment Services
+            value: employmentServices
+          - text: Family Services
+            value: familyServices
+          - text: Financial Services
+            value: financialServices
+          - text: Food Assistance
+            value: foodAssistance
+          - text: Health Services
+            value: healthServices
+          - text: Housing Services
+            value: housingServices
+          - text: Immigrants Services
+            value: immigrantsServices
+          - text: Legal Services
+            value: legalServices
+          - text: LGBTQ+ Friendly
+            value: lgbtq+Friendly
+          - text: Mental Health Services
+            value: mentalHealthServices
+          - text: Mutual Aid
+            value: mutualAid
+          - text: Pet Services
+            value: petServices
+          - text: Senior Services
+            value: seniorServices
+          - text: SNAP Services
+            value: snapServices
+          - text: Substance Use Programs
+            value: substanceUsePrograms
+          - text: Technology Services
+            value: technologyServices
+          - text: Veteran Services
+            value: veteranServices
+          - text: WIC Services
+            value: wicServices
+          - text: Womens Services
+            value: womensServices
+      readonly: false
+      required: false
+      sort: 13
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: tags
+      table: socialServices
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: templates
+    field: id
+    type: uuid
+    meta:
+      collection: templates
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: templates
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: templates
+    field: handle
+    type: string
+    meta:
+      collection: templates
+      conditions: null
+      display: null
+      display_options: null
+      field: handle
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: handle
+      table: templates
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: templates
+    field: template
+    type: text
+    meta:
+      collection: templates
+      conditions: null
+      display: null
+      display_options: null
+      field: template
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: markdown
+        lineWrapping: true
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: template
+      table: templates
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: templates
+    field: order
+    type: integer
+    meta:
+      collection: templates
+      conditions: null
+      display: null
+      display_options: null
+      field: order
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: order
+      table: templates
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: templates
+    field: subhandle
+    type: string
+    meta:
+      collection: templates
+      conditions: null
+      display: null
+      display_options: null
+      field: subhandle
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: subhandle
+      table: templates
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+relations:
+  - collection: communities
+    field: userUpdated
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: communities
+      many_field: userUpdated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: communities
+      column: userUpdated
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: communities_userupdated_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: directus_webhooks
+    field: migrated_flow
+    related_collection: directus_flows
+    meta: null
+    schema:
+      table: directus_webhooks
+      column: migrated_flow
+      foreign_key_table: directus_flows
+      foreign_key_column: id
+      constraint_name: directus_webhooks_migrated_flow_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
