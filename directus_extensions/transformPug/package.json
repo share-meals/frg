@@ -1,6 +1,6 @@
 {
     "name": "transformPug",
-    "description": "directus extension to convert pug to html and js"
+    "description": "directus extension to convert pug to html and js",
     "icon": "extension",
     "version": "1.0.0",
     "keywords": [
