@@ -8,6 +8,7 @@
     "start:auth_keycloak": "docker-compose -f ./yaml/auth.yaml --env-file ./env/auth.env up auth_keycloak",
     "start:auth_postgres": "docker-compose -f ./yaml/auth.yaml --env-file ./env/auth.env up auth_postgres",
     "start:d7": "docker-compose -f ./yaml/d7.yaml --env-file ./env/d7.env up",
+      "start:d7:d": "docker-compose -f ./yaml/d7.yaml --env-file ./env/d7.env up -d",
     "start:d7_directus": "docker-compose -f ./yaml/d7.yaml --env-file ./env/d7.env up d7_directus",
     "start:d7_postgres": "docker-compose -f ./yaml/d7.yaml --env-file ./env/d7.env up d7_postgres",
     "start:i18n": "docker-compose -f ./yaml/i18n.yaml --env-file ./env/i18n.env up",
