@@ -2,7 +2,7 @@ version: "3"
 
 services:
   libretranslate:
-    container_name: libretranslate
+    container_name: i18n_libretranslate
     image: libretranslate/libretranslate:latest
     restart: unless-stopped
     ports:
