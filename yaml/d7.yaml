@@ -1,6 +1,7 @@
 version: "3"
 services:
   d7_postgres:
+    container_name: d7_postgres
     environment:
       POSTGRES_DB: ${D7_POSTGRES_DB}
       POSTGRES_PASSWORD: ${D7_POSTGRES_PASSWORD}
@@ -23,6 +24,7 @@ services:
       - ../data/d7_postgres/init:/docker-entrypoint-initb.d
 
   d7_directus:
+    container_name: d7_directus
     depends_on:
       # - d7_cache
       d7_postgres:
