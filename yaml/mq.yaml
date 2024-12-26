@@ -2,6 +2,7 @@ version: '3.5'
 
 services:
   mq_redis:
+    container_name: mq_redis
     image: redis:7.4-alpine
     restart: always
     ports:
@@ -13,21 +14,21 @@ services:
     networks:
       - frg-network
 
-  mq_bullboard:
-    image: venatum/bull-board
-    restart: always
-    ports:
-      - "${MQ_BULLBOARD_PORT}:3000"
-    environment:
-      REDIS_HOST: mq_redis
-      REDIS_PORT: ${MQ_REDIS_PORT}
+#  mq_bullboard:
+#    image: venatum/bull-board
+#    restart: always
+#    ports:
+#      - "${MQ_BULLBOARD_PORT}:3000"
+#    environment:
+#      REDIS_HOST: mq_redis
+#      REDIS_PORT: ${MQ_REDIS_PORT}
 #      REDIS_PASSWORD: example-password
 #      REDIS_USE_TLS: 'false'
 #      BULL_PREFIX: bull
-    depends_on:
-      - mq_redis
-    networks:
-      - frg-network
+#    depends_on:
+#      - mq_redis
+#    networks:
+#      - frg-network
 
 volumes:
   redis_db_data:
