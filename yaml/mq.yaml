@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   mq_redis:
     container_name: mq_redis

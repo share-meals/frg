@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   auth_postgres:
     command: postgres -c stats_temp_directory=/tmp
