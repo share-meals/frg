@@ -1,4 +1,4 @@
 **/.DS_Store
-data
-!data/d7_directus/*
+data/*
+!data/d7_directus/**/*
 node_modules
