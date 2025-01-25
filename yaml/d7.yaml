@@ -23,9 +23,6 @@ services:
       - ../data/d7_postgres/init:/docker-entrypoint-initb.d
 
   d7_directus:
-    build:
-      context: ../
-      dockerfile: ./docker/d7.dockerfile
     container_name: d7_directus
     depends_on:
       # - d7_cache
@@ -58,7 +55,7 @@ services:
       # CACHE_ENABLED: "true"
       # CACHE_STORE: "redis"
       # REDIS: "redis://cache:6379"
-    image: sharemeals/frg-d7-directus:1.0.0
+    image: directus/directus:11.3.5
     networks:
       - frg-network
     ports:
