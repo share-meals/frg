@@ -60,10 +60,6 @@ services:
       - frg-network
     ports:
       - "${D7_DIRECTUS_PORT}:8055"
-    volumes:
-      - ../data/d7_directus/uploads:/directus/uploads
-      - ../data/d7_directus/extensions:/directus/extensions
-      - ../data/d7_directus/schema-sync:/directus/schema-sync
 
 networks:
   frg-network:
