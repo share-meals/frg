@@ -23,7 +23,7 @@ if (!dbName || !dbUser || !BUCKET_NAME || !process.env.BACKUP_REGION) {
 const tempFilePath = path.join(os.tmpdir(), `${new Date().toISOString().split('T')[0]}.tar`);  // Temp file path for the uncompressed dump
 
 // Construct the docker exec command
-const dockerCommand = `docker exec ${containerName} pg_dump -U ${dbUser} -c --format=tar ${dbName} -f /tmp/${S3_OBJECT_KEY}`;
+const dockerCommand = `docker exec ${containerName} pg_dump -U ${dbUser} -c --format=tar ${dbName} -f /tmp/${S3_OBJECT_KEY} --exclude-table=public.directus_revisions`;
 
 const pgDumpProcess = exec(dockerCommand);
 
