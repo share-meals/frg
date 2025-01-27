@@ -49,6 +49,8 @@ services:
       EXTENSIONS_AUTO_RELOAD: "true" # only for extensions development
       IMPORT_IP_DENY_LIST: ${D7_DIRECTUS_IMPORT_IP_DENY_LIST}
       KEY: ${D7_DIRECTUS_KEY}
+      REDIS_HOST: mq_redis
+      REDIS_PORT: ${MQ_REDIS_PORT}
       PUBLIC_URL: ${D7_DIRECTUS_PUBLIC_URL}
       SECRET: ${D7_DIRECTUS_SECRET}
       WEBSOCKETS_ENABLED: "true"
@@ -60,7 +62,9 @@ services:
       - frg-network
     ports:
       - "${D7_DIRECTUS_PORT}:8055"
-
+    volumes:
+      - ../d7/directus/uploads:/directus/uploads
+      - ../d7/directus/extensions:/directus/extensions
 networks:
   frg-network:
     driver: bridge

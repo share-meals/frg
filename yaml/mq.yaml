@@ -11,7 +11,7 @@ services:
     restart: always
     volumes:
       - redis_db_data:/data/mq_redis
-
+    
   mq_bullboard:
     container_name: mq_bullboard
     depends_on:
