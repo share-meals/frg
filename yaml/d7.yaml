@@ -67,7 +67,7 @@ services:
       # CACHE_ENABLED: "true"
       # CACHE_STORE: "redis"
       # REDIS: "redis://cache:6379"
-    image: directus/directus:11.3.5
+    image: directus/directus:11.5.1
     networks:
       - frg-network
     ports:
