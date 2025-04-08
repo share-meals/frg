@@ -2,7 +2,7 @@ import * as AWS from '@aws-sdk/client-s3';
 import {Crypto} from '@peculiar/webcrypto'; // needed for S3
 import {defineOperationApi} from '@directus/extensions-sdk';
 
-global.crypto = new Crypto()
+//global.crypto = new Crypto()
 
 type Options = {};
 
