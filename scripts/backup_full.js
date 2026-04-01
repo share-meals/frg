@@ -9,7 +9,7 @@ const { Upload } = require('@aws-sdk/lib-storage');
 dotenv.config({ path: path.join(__dirname, '../env/d7.env') });
 
 // Validate required environment variables
-const requiredVars = ['D7_POSTGRES_DB', 'D7_POSTGRES_USER', 'BACKUP_REGION', 'BACKUP_BUCKET_NAME'];
+const requiredVars = ['D7_POSTGRES_DB', 'D7_POSTGRES_USER', 'BACKUP_REGION', 'BACKUP_BUCKET_NAME', 'D7_DIRECTUS_AWS_S3_KEY_ID', 'D7_DIRECTUS_AWS_S3_ACCESS_KEY'];
 for (const varName of requiredVars) {
     if (!process.env[varName]) {
         console.error(`Error: ${varName} environment variable is required`);
@@ -21,7 +21,9 @@ const {
     D7_POSTGRES_DB: dbName,
     D7_POSTGRES_USER: dbUser,
     BACKUP_REGION: awsRegion,
-    BACKUP_BUCKET_NAME: bucketName
+    BACKUP_BUCKET_NAME: bucketName,
+    D7_DIRECTUS_AWS_S3_KEY_ID: awsAccessKeyId,
+    D7_DIRECTUS_AWS_S3_ACCESS_KEY: awsSecretAccessKey
 } = process.env;
 
 const dateString = new Date().toISOString().replace(/[:.]/g, '-');
@@ -31,8 +33,14 @@ const archivePath = `/tmp/${archiveName}`;
 
 console.log(`Starting full backup at ${dateString}...`);
 
-// Initialize S3 client
-const s3Client = new S3Client({ region: awsRegion });
+// Initialize S3 client with explicit credentials from d7.env
+const s3Client = new S3Client({
+    region: awsRegion,
+    credentials: {
+        accessKeyId: awsAccessKeyId,
+        secretAccessKey: awsSecretAccessKey
+    }
+});
 
 function execPromise(command, options = {}) {
     return new Promise((resolve, reject) => {
