@@ -13,7 +13,11 @@
         "start:i18n": "docker compose -f ./yaml/i18n.yaml --env-file ./env/i18n.env up",
         "start:i18n:d": "docker compose -f ./yaml/i18n.yaml --env-file ./env/i18n.env up -d",
         "start:mq": "docker compose -f ./yaml/mq.yaml --env-file ./env/mq.env up",
-        "start:mq:d": "docker compose -f ./yaml/mq.yaml --env-file ./env/mq.env up -d"
+        "start:mq:d": "docker compose -f ./yaml/mq.yaml --env-file ./env/mq.env up -d",
+        "backup:db": "node scripts/backup_d7_postgres.js",
+        "backup:db:full": "node scripts/backup_d7_postgres.js --full",
+        "backup:full": "node scripts/backup_full.js",
+        "restore:full": "node scripts/restore_full.js"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.735.0",
