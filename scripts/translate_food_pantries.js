@@ -10,6 +10,7 @@ const DIRECTUS_URL = 'http://localhost:8055';
 const LIBRETRANSLATE_URL = process.env.LIBRETRANSLATE_URL || 'http://localhost:5000';
 const LIBRETRANSLATE_API_KEY = process.env.LIBRETRANSLATE_API_KEY || '';
 const BATCH_SIZE = 50;
+const FORCE = process.argv.includes('--force');
 
 const mdToHtml = new showdown.Converter();
 const htmlToMd = new TurndownService({ bulletListMarker: '-' });
@@ -84,7 +85,7 @@ async function getLanguages(headers) {
 }
 
 async function main() {
-    console.log('Starting food pantries translation...\n');
+    console.log(`Starting food pantries translation...${FORCE ? ' (FORCE mode — re-translating all)' : ''}\n`);
 
     const headers = { 'Authorization': `Bearer ${STATIC_TOKEN}`, 'Content-Type': 'application/json' };
 
@@ -119,7 +120,7 @@ async function main() {
                 for (const lang of langs) {
                     const existing = (pantry.translations || []).find(t => t.languages_code === lang);
 
-                    if (existing) {
+                    if (existing && !FORCE) {
                         // Skip if translation exists and is newer than lastVerified
                         const lastVerified = pantry.lastVerified ? new Date(pantry.lastVerified) : null;
                         const lastUpdated = existing.lastUpdated ? new Date(existing.lastUpdated) : null;
