@@ -77,6 +77,52 @@ services:
     volumes:
       - ../d7/directus/uploads:/directus/uploads
       - ../d7/directus/extensions:/directus/extensions
+
+  d7_healthcheck:
+    container_name: d7_healthcheck
+    image: alpine:3.19
+    depends_on:
+      d7_postgres:
+        condition: service_healthy
+      d7_directus:
+        condition: service_started
+    environment:
+      HC_DIRECTUS_URL: ${D7_HC_DIRECTUS_URL:-}
+      HC_POSTGRES_URL: ${D7_HC_POSTGRES_URL:-}
+      DIRECTUS_HOST: d7_directus
+      DIRECTUS_PORT: 8055
+      POSTGRES_HOST: d7_postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${D7_POSTGRES_USER}
+      POSTGRES_DB: ${D7_POSTGRES_DB}
+      CHECK_INTERVAL: ${D7_HC_INTERVAL:-60}
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        apk add --no-cache curl postgresql-client > /dev/null 2>&1
+        echo "Healthcheck monitor started (interval: $${CHECK_INTERVAL}s)"
+        while true; do
+          if [ -n "$$HC_DIRECTUS_URL" ]; then
+            if curl -sf http://$$DIRECTUS_HOST:$$DIRECTUS_PORT/server/ping > /dev/null 2>&1; then
+              curl -fsS -m 10 --retry 3 "$$HC_DIRECTUS_URL" > /dev/null 2>&1
+            else
+              curl -fsS -m 10 --retry 3 "$$HC_DIRECTUS_URL/fail" > /dev/null 2>&1
+            fi
+          fi
+          if [ -n "$$HC_POSTGRES_URL" ]; then
+            if pg_isready -h $$POSTGRES_HOST -p $$POSTGRES_PORT -U $$POSTGRES_USER -d $$POSTGRES_DB > /dev/null 2>&1; then
+              curl -fsS -m 10 --retry 3 "$$HC_POSTGRES_URL" > /dev/null 2>&1
+            else
+              curl -fsS -m 10 --retry 3 "$$HC_POSTGRES_URL/fail" > /dev/null 2>&1
+            fi
+          fi
+          sleep $$CHECK_INTERVAL
+        done
+    networks:
+      - frg-network
+    restart: always
+
 networks:
   frg-network:
     driver: bridge
