@@ -135,7 +135,7 @@ async function main() {
             
                     // Translate fields
                     const translatedName = pantry.name ? await translate(pantry.name, lang) : null;
-                    const translatedNotes = pantry.notes ? await translateMarkdown(pantry.notes, lang) : null;
+                    const translatedNotes = pantry.notes?.trim() ? await translateMarkdown(pantry.notes, lang) : null;
                     const translatedHours = await translateHours(pantry.hours, lang);
 
                     const payload = {
