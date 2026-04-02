@@ -17,7 +17,8 @@
         "backup:db": "node scripts/backup_d7_postgres.js",
         "backup:db:full": "node scripts/backup_d7_postgres.js --full",
         "backup:full": "node scripts/backup_full.js",
-        "restore:full": "node scripts/restore_full.js"
+        "restore:full": "node scripts/restore_full.js",
+        "translate:foodPantries": "node scripts/translate_food_pantries.js"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.735.0",

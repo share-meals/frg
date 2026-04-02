@@ -45,6 +45,25 @@ Restores from a `.tar.gz` archive created by `backup_full.js`. This will:
 yarn restore:full <path-to-backup.tar.gz>
 ```
 
+### `translate_food_pantries.js` — Translate Food Pantries
+
+Translates the `name`, `notes`, and `hours` fields for all food pantries into the languages defined in the `languages` collection.
+
+- **name**: Translated as plain text
+- **notes**: Markdown is converted to HTML, translated (preserving tags), then converted back to markdown
+- **hours**: JSON structure is preserved (`days`, `timeStart`, `timeEnd` unchanged), only the optional `notes` field within each entry is translated
+
+The script is idempotent — it skips translations that are already up to date. A translation is considered stale when the food pantry's `lastVerified` timestamp is newer than the translation's `lastUpdated` timestamp.
+
+```bash
+yarn translate:foodPantries
+```
+
+Requires:
+- Directus running locally with a static token configured
+- LibreTranslate running (default: `http://localhost:5000`)
+- Languages populated in the `languages` collection
+
 ## Environment Variables
 
 Set in `env/d7.env`:
@@ -55,6 +74,9 @@ Set in `env/d7.env`:
 | `D7_POSTGRES_USER` | PostgreSQL user |
 | `BACKUP_BUCKET_NAME` | S3 bucket for storing backups |
 | `BACKUP_REGION` | AWS region for the S3 bucket |
+| `D7_DIRECTUS_STATIC_TOKEN` | Static API token for Directus admin user |
+| `LIBRETRANSLATE_URL` | LibreTranslate endpoint (default: `http://localhost:5000`) |
+| `LIBRETRANSLATE_API_KEY` | LibreTranslate API key (optional, if auth is required) |
 
 ## Archive Structure
 
