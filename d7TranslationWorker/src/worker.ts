@@ -94,7 +94,7 @@ async function processJob(job: Job<JobPayload>): Promise<void> {
     job.updateProgress(25);
     job.log(`${getNow()} - translated name`);
 
-    const translatedNotes = notes ? await translateMarkdown(notes, language) : null;
+    const translatedNotes = notes?.trim() ? await translateMarkdown(notes, language) : null;
     job.updateProgress(50);
     job.log(`${getNow()} - translated notes`);
 
