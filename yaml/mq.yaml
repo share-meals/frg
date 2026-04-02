@@ -30,6 +30,47 @@ services:
       - "${MQ_BULLBOARD_PORT}:3000"
     restart: always
 
+  mq_healthcheck:
+    container_name: mq_healthcheck
+    image: alpine:3.19
+    depends_on:
+      - mq_redis
+      - mq_bullboard
+    environment:
+      HC_REDIS_URL: ${MQ_HC_REDIS_URL:-}
+      HC_BULLBOARD_URL: ${MQ_HC_BULLBOARD_URL:-}
+      REDIS_HOST: mq_redis
+      REDIS_PORT: ${MQ_REDIS_PORT}
+      BULLBOARD_HOST: mq_bullboard
+      BULLBOARD_PORT: 3000
+      CHECK_INTERVAL: ${MQ_HC_INTERVAL:-60}
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        apk add --no-cache curl redis > /dev/null 2>&1
+        echo "Healthcheck monitor started (interval: $${CHECK_INTERVAL}s)"
+        while true; do
+          if [ -n "$$HC_REDIS_URL" ]; then
+            if redis-cli -h $$REDIS_HOST -p $$REDIS_PORT ping 2>/dev/null | grep -q PONG; then
+              curl -fsS -m 10 --retry 3 "$$HC_REDIS_URL" > /dev/null 2>&1
+            else
+              curl -fsS -m 10 --retry 3 "$$HC_REDIS_URL/fail" > /dev/null 2>&1
+            fi
+          fi
+          if [ -n "$$HC_BULLBOARD_URL" ]; then
+            if curl -sf http://$$BULLBOARD_HOST:$$BULLBOARD_PORT > /dev/null 2>&1; then
+              curl -fsS -m 10 --retry 3 "$$HC_BULLBOARD_URL" > /dev/null 2>&1
+            else
+              curl -fsS -m 10 --retry 3 "$$HC_BULLBOARD_URL/fail" > /dev/null 2>&1
+            fi
+          fi
+          sleep $$CHECK_INTERVAL
+        done
+    networks:
+      - frg-network
+    restart: always
+
 volumes:
   redis_db_data:
     external: false
