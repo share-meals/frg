@@ -1,0 +1,742 @@
+[
+  {
+    "id": "18e2267d-34d0-4e71-9686-c740b01bf571",
+    "name": "Queue Job",
+    "icon": "flowsheet",
+    "color": null,
+    "description": "queue a translation job in mq",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "all",
+    "options": {
+      "return": "$last"
+    },
+    "operation": "a4d87c59-b933-40df-9067-c1a467bf6d5e",
+    "date_created": "2025-01-19T01:22:19.844Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "a4d87c59-b933-40df-9067-c1a467bf6d5e",
+        "name": "BullMQ - Queue Job",
+        "key": "operation_queue_bullmq_job_3njry",
+        "type": "operation-queue-bullmq-job",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {},
+        "resolve": null,
+        "reject": null,
+        "flow": "18e2267d-34d0-4e71-9686-c740b01bf571",
+        "date_created": "2025-01-27T03:10:26.709Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  },
+  {
+    "id": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+    "name": "Sync Last Attempted Verify",
+    "icon": "watch",
+    "color": "#6644FF",
+    "description": null,
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "updateCrewLogs"
+      ]
+    },
+    "operation": "ee7567b9-cd96-4673-9c3c-7b335fe8206f",
+    "date_created": "2025-03-03T03:37:32.766Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "2d84dac1-dd2f-47d3-a5c6-fccc5fdbd1b6",
+        "name": "Update Data",
+        "key": "item_update_nc5h2",
+        "type": "item-update",
+        "position_x": 94,
+        "position_y": 13,
+        "options": {
+          "payload": {
+            "lastVerified": "{{timestamp}}"
+          },
+          "collection": "foodPantries",
+          "query": {
+            "filter": {
+              "id": {
+                "_eq": "{{$trigger.payload.foodPantry}}"
+              }
+            }
+          },
+          "permissions": "$full"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+        "date_created": "2025-03-04T19:16:50.504Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "33a970f5-87f5-4673-83d7-a88be0c8151a",
+        "name": "Condition",
+        "key": "is_food_pantry_logged",
+        "type": "condition",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "filter": {
+            "$trigger": {
+              "payload": {
+                "foodPantry": {
+                  "_null": true
+                }
+              }
+            }
+          }
+        },
+        "resolve": null,
+        "reject": "bb74c235-deb9-4a48-9b2e-9806e5df94f7",
+        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+        "date_created": "2025-03-04T14:55:59.577Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "b19dc452-0126-4817-82eb-3877fea3b878",
+        "name": "Condition",
+        "key": "is_food_pantry__call_verified",
+        "type": "condition",
+        "position_x": 76,
+        "position_y": 14,
+        "options": {
+          "filter": {
+            "$trigger": {
+              "payload": {
+                "level": {
+                  "_eq": "verified"
+                }
+              }
+            }
+          }
+        },
+        "resolve": "2d84dac1-dd2f-47d3-a5c6-fccc5fdbd1b6",
+        "reject": null,
+        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+        "date_created": "2025-03-04T19:16:50.519Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "bb74c235-deb9-4a48-9b2e-9806e5df94f7",
+        "name": "Update Data",
+        "key": "item_update_mn8uk",
+        "type": "item-update",
+        "position_x": 56,
+        "position_y": 15,
+        "options": {
+          "collection": "foodPantries",
+          "payload": {
+            "lastAttemptedVerify": "{{timestamp}}"
+          },
+          "query": {
+            "filter": {
+              "id": {
+                "_eq": "{{$trigger.payload.foodPantry}}"
+              }
+            }
+          },
+          "permissions": "$full"
+        },
+        "resolve": "b19dc452-0126-4817-82eb-3877fea3b878",
+        "reject": null,
+        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+        "date_created": "2025-03-04T14:55:59.570Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "ee7567b9-cd96-4673-9c3c-7b335fe8206f",
+        "name": "inject timestamp",
+        "key": "timestamp",
+        "type": "exec",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "code": "module.exports = async function(data) {\n\treturn (new Date()).toISOString();\n}"
+        },
+        "resolve": "33a970f5-87f5-4673-83d7-a88be0c8151a",
+        "reject": null,
+        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
+        "date_created": "2025-03-04T14:48:18.498Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  },
+  {
+    "id": "5816f3ca-53c1-4dfb-8d88-00c838fc19e9",
+    "name": "Build Communities",
+    "icon": "flowsheet",
+    "color": null,
+    "description": "build all community pages",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": "activity",
+    "options": {
+      "requireSelection": false,
+      "collections": [
+        "communities"
+      ]
+    },
+    "operation": "a50114a3-288a-477b-b05f-fe3bda54ae6e",
+    "date_created": "2025-01-19T01:22:20.117Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "5b77ddc9-762e-4cd6-b2ae-053481d107ac",
+        "name": "Build Community",
+        "key": "buildCommunity",
+        "type": "trigger",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+          "payload": "{{ $last }}"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "5816f3ca-53c1-4dfb-8d88-00c838fc19e9",
+        "date_created": "2025-01-19T01:22:20.144Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "a50114a3-288a-477b-b05f-fe3bda54ae6e",
+        "name": "Read Data",
+        "key": "item_read_am7l5",
+        "type": "item-read",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "collection": "communities",
+          "query": {
+            "sort": "name"
+          },
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54"
+        },
+        "resolve": "5b77ddc9-762e-4cd6-b2ae-053481d107ac",
+        "reject": null,
+        "flow": "5816f3ca-53c1-4dfb-8d88-00c838fc19e9",
+        "date_created": "2025-01-19T01:22:20.153Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  },
+  {
+    "id": "75ae13e0-5dbb-4b24-9896-84fba30fff98",
+    "name": "Manual: Dump Food Pantries All Languages",
+    "icon": "translate",
+    "color": null,
+    "description": "Manually trigger food pantries dump for all languages",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": "all",
+    "options": null,
+    "operation": "66d4576d-1960-4a12-b4e9-343ea31bfed5",
+    "date_created": "2026-04-02T19:05:21.421Z",
+    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "operations": [
+      {
+        "id": "2d17f32c-5e20-4c89-a141-d55e2f575e76",
+        "name": "Trigger Dump per Language",
+        "key": "trigger_dump",
+        "type": "trigger",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+          "payload": "{{ $last }}"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "75ae13e0-5dbb-4b24-9896-84fba30fff98",
+        "date_created": "2026-04-02T19:05:21.508Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "66d4576d-1960-4a12-b4e9-343ea31bfed5",
+        "name": "Read Languages",
+        "key": "read_languages",
+        "type": "item-read",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "collection": "languages",
+          "query": {
+            "fields": [
+              "code"
+            ],
+            "limit": -1
+          },
+          "permissions": "$full"
+        },
+        "resolve": "2d17f32c-5e20-4c89-a141-d55e2f575e76",
+        "reject": null,
+        "flow": "75ae13e0-5dbb-4b24-9896-84fba30fff98",
+        "date_created": "2026-04-02T19:05:21.470Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      }
+    ]
+  },
+  {
+    "id": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+    "name": "Dump Open Food Pantries by Language",
+    "icon": "bolt",
+    "color": null,
+    "description": "Exports all open food pantries for a given language, using translated fields when available",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "all",
+    "options": {},
+    "operation": "395d8aee-34f6-4048-8132-e81a1c5e1a42",
+    "date_created": "2025-04-08T21:09:12.172Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "395d8aee-34f6-4048-8132-e81a1c5e1a42",
+        "name": "Read Data",
+        "key": "getData",
+        "type": "item-read",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "collection": "foodPantries",
+          "query": {
+            "filter": {
+              "status": {
+                "_eq": "open"
+              }
+            },
+            "fields": [
+              "*",
+              "translations.*"
+            ],
+            "limit": -1
+          },
+          "permissions": "$full"
+        },
+        "resolve": "f21b2ff0-68b2-4d08-8046-2c9b5c0f2027",
+        "reject": null,
+        "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+        "date_created": "2025-04-08T21:12:07.492Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "51f6888e-350c-4edb-bbc6-34142c876f8a",
+        "name": "Save File",
+        "key": "save_file_gxtio",
+        "type": "saveFile",
+        "position_x": 55,
+        "position_y": 1,
+        "options": {
+          "filename": "foodPantriesOpen.json"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+        "date_created": "2026-01-05T21:41:22.991Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "5dab52f6-9540-41a9-8174-e4635b2b34be",
+        "name": "Run Script",
+        "key": "exec_s517r",
+        "type": "exec",
+        "position_x": 55,
+        "position_y": 1,
+        "options": {
+          "code": "module.exports = async function(data) {\n  const language = (data.$trigger.body && data.$trigger.body.language) || (data.$trigger && data.$trigger.code);\n  return {\n    data: data.$last,\n    filename: language ? \"foodPantriesOpen.\" + language + \".json\" : \"foodPantriesOpen.json\"\n  };\n}"
+        },
+        "resolve": "ef783f3d-8b44-4b31-b9f3-7357c83675c9",
+        "reject": null,
+        "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+        "date_created": "2026-01-05T21:42:57.819Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "ef783f3d-8b44-4b31-b9f3-7357c83675c9",
+        "name": "Save File",
+        "key": "save_file_3s5y6",
+        "type": "saveFile",
+        "position_x": 73,
+        "position_y": 1,
+        "options": {
+          "filename": "{{$last.filename}}",
+          "folder": "be5f2374-dc9f-48f9-832b-9926ed8c8bc3"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+        "date_created": "2026-01-05T21:42:57.806Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "f21b2ff0-68b2-4d08-8046-2c9b5c0f2027",
+        "name": "Run Script",
+        "key": "scrubData",
+        "type": "exec",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "code": "const exportFields = {\n  id: null,\n  name: null,\n  status: null,\n  notes: null,\n  streetAddress: null,\n  addressLocality: null,\n  addressRegion: null,\n  postalCode: null,\n  addressCountry: null,\n  geolocation: null,\n  hours: null,\n  phoneNumbers: (ps) => ps ? ps.filter((p) => p.isPrivate === false) : ps,\n  emailAddresses: (es) => es ? es.filter((e) => e.isPrivate === false) : es,\n  website: null,\n  idRequired: null,\n  lastVerified: null,\n  type: null,\n  dietaryAccomodations: null\n}\n\nconst translatableFields = [\"name\", \"notes\", \"hours\"];\n\nmodule.exports = async function(data) {\n  const language = (data.$trigger.body && data.$trigger.body.language) || (data.$trigger && data.$trigger.code);\n\n  return data.$last.map((record) => {\n    const translation = language && record.translations\n      ? record.translations.find((t) => t.languages_code === language)\n      : null;\n\n    let payload = {};\n    Object.keys(exportFields).forEach((f) => {\n      let value = record[f];\n      if (translation && translatableFields.includes(f) && translation[f] != null) {\n        value = translation[f];\n      }\n      payload[f] = exportFields[f] === null ? value : exportFields[f](value);\n    });\n    return payload;\n  });\n}"
+        },
+        "resolve": "5dab52f6-9540-41a9-8174-e4635b2b34be",
+        "reject": null,
+        "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+        "date_created": "2025-04-08T21:12:07.459Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  },
+  {
+    "id": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+    "name": "Build Community",
+    "icon": "build",
+    "color": null,
+    "description": "build a single community",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "activity",
+    "options": {
+      "return": "transform_pug"
+    },
+    "operation": "77e85902-3abf-42e5-9964-80748ef54c5a",
+    "date_created": "2025-01-19T01:22:20.271Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "389936ae-e4ba-4a99-87b5-19bbc0739851",
+        "name": "Read Data",
+        "key": "get_farmers_markets",
+        "type": "item-read",
+        "position_x": 21,
+        "position_y": 19,
+        "options": {
+          "collection": "farmersMarkets",
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54",
+          "query": {
+            "filter": {
+              "geolocation": {
+                "_intersects_bbox": "{{$trigger.geometry}}"
+              }
+            }
+          }
+        },
+        "resolve": "91396fda-b765-4e9c-8104-8b7f420dc754",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.450Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "3fab0d6a-4c7b-461a-bf99-4adae7bab2a5",
+        "name": "Get Social Services",
+        "key": "get_social_services",
+        "type": "item-read",
+        "position_x": 3,
+        "position_y": 19,
+        "options": {
+          "collection": "socialServices",
+          "query": {
+            "filter": {
+              "geolocation": {
+                "_intersects_bbox": "{{$trigger.geometry}}"
+              }
+            }
+          },
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54"
+        },
+        "resolve": "389936ae-e4ba-4a99-87b5-19bbc0739851",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.459Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "646f53e0-b00f-4b8a-8109-c169d0363768",
+        "name": "Upload to S3",
+        "key": "operation_upload_to_s3_6b3xp",
+        "type": "operation-upload-to-s3",
+        "position_x": 21,
+        "position_y": 55,
+        "options": {},
+        "resolve": "ba4329b9-826e-4e13-9c9e-19c995a508c0",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.389Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "6e549b6a-6914-40de-9375-541db453a757",
+        "name": "Transform Payload",
+        "key": "transform_xy28d",
+        "type": "transform",
+        "position_x": 21,
+        "position_y": 37,
+        "options": {
+          "json": {
+            "data": {
+              "community": "{{ $trigger }}",
+              "farmersMarkets": "{{ get_farmers_markets }}",
+              "foodPantries": "{{ get_food_pantries }}",
+              "retailFoodStores": "{{ get_retail_food_stores }}",
+              "socialServices": "{{ get_social_services }}",
+              "communityFridges": "{{ get_community_fridges }}"
+            },
+            "templates": "{{ get_template }}"
+          }
+        },
+        "resolve": "e54be7b5-608e-45be-8b2a-7de868e223e6",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.431Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "7640c2a0-0a25-44d0-982e-e620b29ab3d2",
+        "name": "Trigger Flow",
+        "key": "trigger_usrid",
+        "type": "trigger",
+        "position_x": 3,
+        "position_y": 73,
+        "options": {
+          "flow": "18e2267d-34d0-4e71-9686-c740b01bf571",
+          "payload": "{{ $last }}"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.320Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "77e85902-3abf-42e5-9964-80748ef54c5a",
+        "name": "Get Food Pantries",
+        "key": "get_food_pantries",
+        "type": "item-read",
+        "position_x": 21,
+        "position_y": 1,
+        "options": {
+          "collection": "foodPantries",
+          "query": {
+            "filter": {
+              "geolocation": {
+                "_intersects_bbox": "{{$trigger.geometry}}"
+              }
+            }
+          },
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54"
+        },
+        "resolve": "ed70bb84-a616-4c3a-bb3e-cf2391218f37",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.490Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "91396fda-b765-4e9c-8104-8b7f420dc754",
+        "name": "Read Data",
+        "key": "get_template",
+        "type": "item-read",
+        "position_x": 3,
+        "position_y": 37,
+        "options": {
+          "collection": "templates",
+          "query": {
+            "filter": {
+              "_and": [
+                {
+                  "handle": {
+                    "_eq": "FPC Web"
+                  }
+                }
+              ]
+            },
+            "sort": "order"
+          },
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54"
+        },
+        "resolve": "6e549b6a-6914-40de-9375-541db453a757",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.440Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "ba4329b9-826e-4e13-9c9e-19c995a508c0",
+        "name": "Run Script",
+        "key": "exec_ttnbp",
+        "type": "exec",
+        "position_x": 39,
+        "position_y": 55,
+        "options": {
+          "code": "module.exports = async function(data) {\n    if(data.$trigger.translationTargets && data.$trigger.translationTargets.length > 0\n      && false // TODO: temporarily disable translations\n      ){\n    \treturn data.$trigger.translationTargets.map((target) => ({\n    \t    queue: 'fpc web i18n',\n    \t    name: data.$trigger.name,\n    \t    payload: {\n    \t    bucket: data.s3_config.bucket,\n    \t    key: data.s3_config.key,\n    \t    languages: {\n\t\t        source: 'en',\n    \t        target\n    \t    },\n                slug: data.s3_config.slug,\n        \t}\n        \t}));\n    }else{\n        // nothing to do\n        return [];\n    }\n}"
+        },
+        "resolve": "7640c2a0-0a25-44d0-982e-e620b29ab3d2",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.330Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "be393736-3133-4dca-afd0-e777842f445b",
+        "name": "Run Script",
+        "key": "s3_config",
+        "type": "exec",
+        "position_x": 3,
+        "position_y": 55,
+        "options": {
+          "code": "function generateTableOfContents(htmlString) {\n    const tocList = [];\n    const sectionRegex = /<section id=\"([^\"]+)\">\\s*<h\\d>(.*?)<\\/h\\d>(.*?)<\\/section>/gs;\n\n    let match;\n    while ((match = sectionRegex.exec(htmlString)) !== null) {\n        const sectionId = match[1];\n        const sectionTitle = match[2];\n        const nestedHtml = match[3];\n\n        // Create the TOC entry for the current section\n        let tocEntry = `<li><a href=\"#${sectionId}\">${sectionTitle}</a>`;\n\n        // Check for nested sections\n        const nestedSections = getNestedSections(nestedHtml);\n        if (nestedSections.length > 0) {\n            tocEntry += '<ul>';\n            nestedSections.forEach(nested => {\n                tocEntry += `<li><a href=\"#${nested.id}\">${nested.title}</a></li>`;\n            });\n            tocEntry += '</ul>';\n        }\n        tocEntry += '</li>';\n\n        tocList.push(tocEntry);\n    }\n\n    // Combine the TOC entries into an unordered list\n    const tocHtml = `<ul>${tocList.join('')}</ul>`;\n\n    // Replace [toc] in the original HTML string with the TOC\n    return htmlString.replace('[toc]', tocHtml);\n}\n\nfunction getNestedSections(nestedHtml) {\n    const nestedSections = [];\n    const nestedSectionRegex = /<section id=\"([^\"]+)\">\\s*<h\\d>(.*?)<\\/h\\d>/gs;\n\n    let match;\n    while ((match = nestedSectionRegex.exec(nestedHtml)) !== null) {\n        nestedSections.push({ id: match[1], title: match[2] });\n    }\n\n    return nestedSections;\n}\n\n\nfunction slugify(str) {\n  return str\n    .toLowerCase()                 // Convert to lowercase\n    .replace(/[^\\w\\s-]/g, '')      // Remove punctuation (non-word characters except spaces and -)\n    .replace(/[\\s-]+/g, '_');         // Replace spaces with underscores\n}\n\nmodule.exports = async function(data) {\n    const slug = slugify(data.$trigger.name);\n \treturn {\n        bucket: 'sm-frg-pages',\n        key: `${slug}_en.html`,\n        body: generateTableOfContents(data.$last),\n        contentType: 'text/html; charset=utf-8',\n        slug, // needed for i18n bullmq\n    }\n}"
+        },
+        "resolve": "646f53e0-b00f-4b8a-8109-c169d0363768",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.401Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "e54be7b5-608e-45be-8b2a-7de868e223e6",
+        "name": " Transform Pug",
+        "key": "transform_pug",
+        "type": "operation-transform-pug",
+        "position_x": 39,
+        "position_y": 37,
+        "options": {},
+        "resolve": "be393736-3133-4dca-afd0-e777842f445b",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.418Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      },
+      {
+        "id": "ed70bb84-a616-4c3a-bb3e-cf2391218f37",
+        "name": "Get Retail Food Stores",
+        "key": "get_retail_food_stores",
+        "type": "item-read",
+        "position_x": 39,
+        "position_y": 1,
+        "options": {
+          "collection": "retailFoodStores",
+          "query": {
+            "filter": {
+              "geolocation": {
+                "_intersects_bbox": "{{$trigger.geometry}}"
+              }
+            }
+          },
+          "permissions": "14fcaae6-5805-4f57-8fdf-859b829f8b54"
+        },
+        "resolve": "3fab0d6a-4c7b-461a-bf99-4adae7bab2a5",
+        "reject": null,
+        "flow": "963537d8-2d0e-4c00-b7ce-82cc1d4c5432",
+        "date_created": "2025-01-19T01:22:20.472Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  },
+  {
+    "id": "c912465d-74b5-4575-9a22-a87cf01b6756",
+    "name": "Scheduled: Dump Food Pantries All Languages",
+    "icon": "translate",
+    "color": null,
+    "description": "Reads all languages and triggers a food pantries dump for each one",
+    "status": "active",
+    "trigger": "schedule",
+    "accountability": "all",
+    "options": {
+      "cron": "0 0 * * 0"
+    },
+    "operation": "61276b08-96f8-48d8-91fc-e9c19b026d23",
+    "date_created": "2026-04-02T01:13:12.689Z",
+    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "operations": [
+      {
+        "id": "312b388a-be32-4508-92b0-8b4b34719feb",
+        "name": "Trigger Dump per Language",
+        "key": "trigger_dump",
+        "type": "trigger",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
+          "payload": "{{ $last }}"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "c912465d-74b5-4575-9a22-a87cf01b6756",
+        "date_created": "2026-04-02T01:45:47.662Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "61276b08-96f8-48d8-91fc-e9c19b026d23",
+        "name": "Read Languages",
+        "key": "read_languages",
+        "type": "item-read",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "collection": "languages",
+          "query": {
+            "fields": [
+              "code"
+            ],
+            "limit": -1
+          },
+          "permissions": "$full"
+        },
+        "resolve": "312b388a-be32-4508-92b0-8b4b34719feb",
+        "reject": null,
+        "flow": "c912465d-74b5-4575-9a22-a87cf01b6756",
+        "date_created": "2026-04-02T01:45:47.625Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      }
+    ]
+  },
+  {
+    "id": "e3192bde-f031-45be-9895-f422ebf646f3",
+    "name": "Manual Build Communities",
+    "icon": "hand_gesture",
+    "color": null,
+    "description": "manually trigger a full build",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": "all",
+    "options": {
+      "collections": [
+        "communities"
+      ],
+      "requireConfirmation": true,
+      "requireSelection": false
+    },
+    "operation": "fd8920f0-e4ec-4c11-a5a3-57a984e2f816",
+    "date_created": "2025-01-27T00:29:17.768Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
+    "operations": [
+      {
+        "id": "fd8920f0-e4ec-4c11-a5a3-57a984e2f816",
+        "name": "Trigger Flow",
+        "key": "trigger_fkafd",
+        "type": "trigger",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "flow": "5816f3ca-53c1-4dfb-8d88-00c838fc19e9"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "e3192bde-f031-45be-9895-f422ebf646f3",
+        "date_created": "2025-01-27T00:29:34.871Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
+      }
+    ]
+  }
+]

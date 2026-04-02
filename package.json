@@ -18,7 +18,10 @@
         "backup:db:full": "node scripts/backup_d7_postgres.js --full",
         "backup:full": "node scripts/backup_full.js",
         "restore:full": "node scripts/restore_full.js",
-        "translate:foodPantries": "node scripts/translate_food_pantries.js"
+        "translate:foodPantries": "node scripts/translate_food_pantries.js",
+        "export:flows": "node scripts/export_flows.js",
+        "export:schema": "docker exec d7_directus npx directus schema snapshot --yes /directus/uploads/snapshot.yaml && docker cp d7_directus:/directus/uploads/snapshot.yaml ./d7/snapshot.yaml",
+        "export:all": "yarn export:schema && yarn export:flows"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.735.0",

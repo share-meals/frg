@@ -64,13 +64,34 @@ Translates the `name`, `notes`, and `hours` fields for all food pantries into th
 The script is idempotent. It skips translations that are already up to date. A translation is considered stale when the food pantry's `lastVerified` is newer than the translation's `lastUpdated`.
 
 ```bash
-yarn translate:foodPantries
+yarn translate:foodPantries           # only translate new/stale records
+yarn translate:foodPantries --force   # re-translate everything
 ```
 
 Requires:
 - Directus running with a static token configured
 - LibreTranslate running (default: `http://localhost:5000`)
 - Languages populated in the `languages` collection
+
+## Schema & Flow Export
+
+### `export_flows.js` — Export Directus Flows
+
+Exports all flows and their operations from Directus to `d7/flows.json` for version tracking.
+
+```bash
+yarn export:flows
+```
+
+### Schema Snapshot
+
+Exports the full Directus schema (collections, fields, relations) to `d7/snapshot.yaml`:
+
+```bash
+yarn export:schema
+```
+
+Both should be run before committing changes to flows or the data model.
 
 ## Environment Variables
 
