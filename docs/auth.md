@@ -1,62 +1,76 @@
-- run `yarn start:auth`
-- admin dashboard looks like:  http://localhost:8123
-- frontend dashboard looks like: http://localhost:8123/realms/master/account/#/
+# Authentication (Keycloak)
 
-# Keycloak Setup for Ideal Workflow
-This is a guide to set up Keycloak for an ideal workflow, which includes regular user accounts that can only be created by an admin, no automatic account creation, social login buttons for users, and users only able to login with their email addresses. Here are the steps to can follow:
+## Running
 
-## Step 1: Install Keycloak
+```bash
+yarn start:auth
+```
 
-First, you need to install Keycloak. Follow the instructions provided in the Getting Started guide for Docker at https://www.keycloak.org/getting-started/getting-started-docker.
+| Dashboard | URL |
+|---|---|
+| Admin | http://localhost:8123 |
+| User account | http://localhost:8123/realms/master/account/#/ |
 
-## Step 2: Enabling Google IDP
-Note. For Google or Microsoft IDP, do not use the default idp social login. 
+## Keycloak Setup
 
-Instead, create a new idp and configure the following: 
-- AUTH_URL
-- TOKEN_URL
-- PROFILE_URL as User Info URL 
+This configuration provides: admin-created user accounts only (no self-registration), social login via Google, and email-based authentication.
 
-[Link to github issue with OIDC solution](https://github.com/keycloak/keycloak/issues/14258)
+### 1. Install Keycloak
 
-## Step 3: Disable Automatic User Creation
+Follow the [Getting Started with Docker](https://www.keycloak.org/getting-started/getting-started-docker) guide.
 
-By default, Keycloak automatically creates a user account for any user who successfully logs in via a social login provider. To disable this automatic user creation, follow the instructions provided in the Keycloak documentation at https://www.keycloak.org/docs/9.0/server_admin/index.html#disabling-automatic-user-creation.
+### 2. Enable Google IDP
 
-Specifically, follow the instructions in the "Disabling Automatic User Creation" section to disable automatic user creation.
+Do not use the default social login IDP for Google or Microsoft. Instead, create a new IDP and configure:
 
-## Step 4: Configure Default Identity Provider
+- `AUTH_URL`
+- `TOKEN_URL`
+- `PROFILE_URL` as User Info URL
 
-To ensure that users are only presented with social login buttons and are not prompted to enter a username and password, you need to configure the default identity provider to be Google. Follow the instructions provided in the Keycloak documentation at https://www.keycloak.org/docs/latest/server_admin/index.html#default_identity_provider.
+See [this GitHub issue](https://github.com/keycloak/keycloak/issues/14258) for the OIDC solution.
 
-Specifically, follow the instructions in the "Configuring the Default Identity Provider" section to configure Google as the default identity provider.
+Create a Google app with redirect URI:
 
-## Step 5: Create Admin and Regular User Accounts
+```
+http://localhost:8080/realms/master/broker/google/endpoint
+```
 
-Now that you have configured Keycloak for social login, you need to create admin and regular user accounts. Follow the instructions provided in the Keycloak documentation at https://www.keycloak.org/docs/latest/server_admin/index.html#creating-users.
+### 3. Disable automatic user creation
 
-Specifically, follow the instructions in the "Creating Users" section to create both an admin user account and a regular user account.
+By default, Keycloak creates accounts for any user who logs in via a social provider. To disable this:
 
+1. Go to **Authentication** in the menu.
+2. Select **First Broker Login** from the list.
+3. Set **Create User If Unique** to `DISABLED`.
+4. Set **Confirm Link Existing Account** to `DISABLED`.
 
-## Step 6: Configure the login page
+Reference: [Keycloak docs — Disabling Automatic User Creation](https://www.keycloak.org/docs/9.0/server_admin/index.html#disabling-automatic-user-creation)
 
-In the Authentication tab, click on the Flows tab and select the Browser flow. Click on the Copy button to make a copy of the flow. Then, click on the new copy of the flow and configure it as follows:
+### 4. Configure default identity provider
 
-- Delete the Username Password Form form.
-- Add an Identity Provider Redirector form after the Browser form.
-- Move the Identity Provider Redirector form to the top of the list.
-- In the Identity Provider Redirector form settings, select the desired identity provider (e.g. Google).
+Set Google as the default IDP so users see social login buttons instead of a username/password form.
 
----
+Reference: [Keycloak docs — Default Identity Provider](https://www.keycloak.org/docs/latest/server_admin/index.html#default_identity_provider)
 
-1. create Google app
-  1. redirect uri looks like http://localhost:8080/realms/master/broker/google/endpoint
-2. add Google IDP
-3. To disable user creation:
-  1. Click Authentication in the menu.
-  2. Select First Broker Login from the list.
-  3. Set Create User If Unique to DISABLED.
-  4. Set Confirm Link Existing Account to DISABLED.
-4. admin login looks like http://localhost:8080/admin/
-5. frontend login looks like http://localhost:8080/realms/master/account/#/
-6. well known looks like http://localhost:8080/realms/master/.well-known/openid-configuration
+### 5. Create user accounts
+
+Create admin and regular user accounts via the Keycloak admin console.
+
+Reference: [Keycloak docs — Creating Users](https://www.keycloak.org/docs/latest/server_admin/index.html#creating-users)
+
+### 6. Configure the login page
+
+1. Go to **Authentication > Flows** and select the **Browser** flow.
+2. Click **Copy** to duplicate the flow.
+3. In the copy, delete the **Username Password Form**.
+4. Add an **Identity Provider Redirector** after the Browser form.
+5. Move it to the top of the list.
+6. In its settings, select the desired identity provider (e.g., Google).
+
+## Reference URLs
+
+| Resource | URL |
+|---|---|
+| Admin dashboard | http://localhost:8080/admin/ |
+| User dashboard | http://localhost:8080/realms/master/account/#/ |
+| Well-known config | http://localhost:8080/realms/master/.well-known/openid-configuration |

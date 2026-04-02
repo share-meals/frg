@@ -1,6 +1,4 @@
-# Backup & Restore Scripts
-
-Scripts for backing up and restoring the Directus (d7) instance, including database, uploads, and extensions.
+# Scripts
 
 ## Prerequisites
 
@@ -8,16 +6,11 @@ Scripts for backing up and restoring the Directus (d7) instance, including datab
 - Node.js dependencies installed (`yarn install` from project root)
 - AWS credentials configured for S3 uploads (optional — backups are kept locally if S3 fails)
 
-## Scripts
+## Backup & Restore
 
 ### `backup_full.js` — Full Backup
 
-Creates a single `.tar.gz` archive containing:
-- **Database**: `pg_dump` of the full PostgreSQL database (custom format)
-- **Uploads**: All files from `/directus/uploads`
-- **Extensions**: All extensions (with `node_modules` stripped)
-
-Uploads the archive to S3 at `s3://frg-directus-backups/full-backups/`. If S3 upload fails, the archive is kept locally at `/tmp/`.
+Creates a single `.tar.gz` archive containing the database, uploads, and extensions (with `node_modules` stripped). Uploads the archive to S3 at `s3://frg-directus-backups/full-backups/`. If S3 fails, the archive is kept locally at `/tmp/`.
 
 ```bash
 yarn backup:full
@@ -34,51 +27,20 @@ yarn backup:db:full     # includes all tables
 
 ### `restore_full.js` — Full Restore
 
-Restores from a `.tar.gz` archive created by `backup_full.js`. This will:
-1. Stop the Directus container
-2. Drop and recreate the database
-3. Restore the database from the dump
-4. Replace uploads and extensions on the host (volume-mounted)
-5. Restart Directus
+Restores from a `.tar.gz` archive created by `backup_full.js`:
+
+1. Extracts the archive
+2. Stops the Directus container
+3. Drops and recreates the database
+4. Restores the database dump
+5. Replaces uploads and extensions on the host (volume-mounted)
+6. Restarts Directus
 
 ```bash
 yarn restore:full <path-to-backup.tar.gz>
 ```
 
-### `translate_food_pantries.js` — Translate Food Pantries
-
-Translates the `name`, `notes`, and `hours` fields for all food pantries into the languages defined in the `languages` collection.
-
-- **name**: Translated as plain text
-- **notes**: Markdown is converted to HTML, translated (preserving tags), then converted back to markdown
-- **hours**: JSON structure is preserved (`days`, `timeStart`, `timeEnd` unchanged), only the optional `notes` field within each entry is translated
-
-The script is idempotent — it skips translations that are already up to date. A translation is considered stale when the food pantry's `lastVerified` timestamp is newer than the translation's `lastUpdated` timestamp.
-
-```bash
-yarn translate:foodPantries
-```
-
-Requires:
-- Directus running locally with a static token configured
-- LibreTranslate running (default: `http://localhost:5000`)
-- Languages populated in the `languages` collection
-
-## Environment Variables
-
-Set in `env/d7.env`:
-
-| Variable | Description |
-|---|---|
-| `D7_POSTGRES_DB` | PostgreSQL database name |
-| `D7_POSTGRES_USER` | PostgreSQL user |
-| `BACKUP_BUCKET_NAME` | S3 bucket for storing backups |
-| `BACKUP_REGION` | AWS region for the S3 bucket |
-| `D7_DIRECTUS_STATIC_TOKEN` | Static API token for Directus admin user |
-| `LIBRETRANSLATE_URL` | LibreTranslate endpoint (default: `http://localhost:5000`) |
-| `LIBRETRANSLATE_API_KEY` | LibreTranslate API key (optional, if auth is required) |
-
-## Archive Structure
+### Archive structure
 
 ```
 backup.tar.gz
@@ -86,3 +48,42 @@ backup.tar.gz
   uploads/          # Directus uploaded files
   extensions/       # Directus extensions (no node_modules)
 ```
+
+## Translation
+
+### `translate_food_pantries.js` — Translate Food Pantries
+
+Translates the `name`, `notes`, and `hours` fields for all food pantries into the languages defined in the `languages` collection.
+
+| Field | Strategy |
+|---|---|
+| `name` | Plain text translation |
+| `notes` | Markdown converted to HTML, translated, then converted back to preserve formatting |
+| `hours` | JSON structure preserved; only the optional `notes` within each entry is translated |
+
+The script is idempotent. It skips translations that are already up to date. A translation is considered stale when the food pantry's `lastVerified` is newer than the translation's `lastUpdated`.
+
+```bash
+yarn translate:foodPantries
+```
+
+Requires:
+- Directus running with a static token configured
+- LibreTranslate running (default: `http://localhost:5000`)
+- Languages populated in the `languages` collection
+
+## Environment Variables
+
+All set in `env/d7.env`:
+
+| Variable | Description |
+|---|---|
+| `D7_POSTGRES_DB` | PostgreSQL database name |
+| `D7_POSTGRES_USER` | PostgreSQL user |
+| `BACKUP_BUCKET_NAME` | S3 bucket for storing backups |
+| `BACKUP_REGION` | AWS region for the S3 bucket |
+| `D7_DIRECTUS_AWS_S3_KEY_ID` | AWS access key ID for S3 |
+| `D7_DIRECTUS_AWS_S3_ACCESS_KEY` | AWS secret access key for S3 |
+| `D7_DIRECTUS_STATIC_TOKEN` | Static API token for Directus admin user |
+| `LIBRETRANSLATE_URL` | LibreTranslate endpoint (default: `http://localhost:5000`) |
+| `LIBRETRANSLATE_API_KEY` | LibreTranslate API key (optional, if auth is required) |
