@@ -174,6 +174,156 @@
     ]
   },
   {
+    "id": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+    "name": "Queue Food Pantry Translation on Update",
+    "icon": "translate",
+    "color": null,
+    "description": "When a food pantry name, notes, or hours changes, enqueue a translation job per language",
+    "status": "inactive",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.update"
+      ],
+      "collections": [
+        "foodPantries"
+      ]
+    },
+    "operation": "5839adf4-1601-4394-beaa-16d049f3eee8",
+    "date_created": "2026-04-02T19:18:33.504Z",
+    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "operations": [
+      {
+        "id": "2325a4db-032f-4155-9cad-ae97c5ba9515",
+        "name": "Trigger Queue Job per Language",
+        "key": "trigger_queue",
+        "type": "trigger",
+        "position_x": 91,
+        "position_y": 1,
+        "options": {
+          "flow": "18e2267d-34d0-4e71-9686-c740b01bf571",
+          "payload": "{{ $last }}"
+        },
+        "resolve": null,
+        "reject": null,
+        "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+        "date_created": "2026-04-02T19:33:59.745Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "52d7833b-7c1c-48e5-9031-2691451d504c",
+        "name": "Build Job Payloads",
+        "key": "build_payloads",
+        "type": "exec",
+        "position_x": 73,
+        "position_y": 1,
+        "options": {
+          "code": "module.exports = async function(data) {\n  const pantry = data.read_pantry[0];\n  const languages = data.read_languages;\n\n  return languages.map(function(lang) {\n    return {\n      queue: \"d7 food pantry translation\",\n      name: \"translate-pantry\",\n      payload: {\n        pantryId: pantry.id,\n        language: lang.code,\n        name: pantry.name,\n        notes: pantry.notes,\n        hours: pantry.hours\n      }\n    };\n  });\n}"
+        },
+        "resolve": "2325a4db-032f-4155-9cad-ae97c5ba9515",
+        "reject": null,
+        "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+        "date_created": "2026-04-02T19:18:33.696Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "5839adf4-1601-4394-beaa-16d049f3eee8",
+        "name": "Read Updated Pantry",
+        "key": "read_pantry",
+        "type": "item-read",
+        "position_x": 19,
+        "position_y": 1,
+        "options": {
+          "collection": "foodPantries",
+          "query": {
+            "filter": {
+              "id": {
+                "_eq": "{{  $trigger.keys[0] }}"
+              }
+            },
+            "fields": [
+              "id",
+              "name",
+              "notes",
+              "hours"
+            ],
+            "limit": 1
+          },
+          "permissions": "$full"
+        },
+        "resolve": "9ac5081f-3a1c-4323-bc3f-e872fce8ba8b",
+        "reject": null,
+        "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+        "date_created": "2026-04-02T19:18:33.582Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "5ba4eb2d-2256-4e19-b493-d4cad9e5e634",
+        "name": "Read Languages",
+        "key": "read_languages",
+        "type": "item-read",
+        "position_x": 55,
+        "position_y": 1,
+        "options": {
+          "collection": "languages",
+          "query": {
+            "fields": [
+              "code"
+            ],
+            "filter": {
+              "code": {
+                "_neq": "en"
+              }
+            },
+            "limit": -1
+          },
+          "permissions": "$full"
+        },
+        "resolve": "52d7833b-7c1c-48e5-9031-2691451d504c",
+        "reject": null,
+        "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+        "date_created": "2026-04-02T19:18:33.669Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      },
+      {
+        "id": "9ac5081f-3a1c-4323-bc3f-e872fce8ba8b",
+        "name": "Check Translatable Fields",
+        "key": "check_fields",
+        "type": "condition",
+        "position_x": 37,
+        "position_y": 1,
+        "options": {
+          "filter": {
+            "_or": [
+              {
+                "$trigger.payload.name": {
+                  "_nnull": true
+                }
+              },
+              {
+                "$trigger.payload.notes": {
+                  "_nnull": true
+                }
+              },
+              {
+                "$trigger.payload.hours": {
+                  "_nnull": true
+                }
+              }
+            ]
+          }
+        },
+        "resolve": "5ba4eb2d-2256-4e19-b493-d4cad9e5e634",
+        "reject": null,
+        "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
+        "date_created": "2026-04-02T19:18:33.632Z",
+        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+      }
+    ]
+  },
+  {
     "id": "5816f3ca-53c1-4dfb-8d88-00c838fc19e9",
     "name": "Build Communities",
     "icon": "flowsheet",
@@ -240,7 +390,12 @@
     "status": "active",
     "trigger": "manual",
     "accountability": "all",
-    "options": null,
+    "options": {
+      "collections": [
+        "foodPantries"
+      ],
+      "requireSelection": false
+    },
     "operation": "66d4576d-1960-4a12-b4e9-343ea31bfed5",
     "date_created": "2026-04-02T19:05:21.421Z",
     "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
