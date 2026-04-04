@@ -64,12 +64,22 @@ Translates the `name`, `notes`, and `hours` fields for all food pantries into th
 The script is idempotent. It skips translations that are already up to date. A translation is considered stale when the food pantry's `lastVerified` is newer than the translation's `lastUpdated`.
 
 ```bash
-yarn translate:foodPantries           # only translate new/stale records
-yarn translate:foodPantries --force   # re-translate everything
+# Local instance (token from d7.env)
+node scripts/translate_food_pantries.js --target http://localhost:8055
+node scripts/translate_food_pantries.js --target http://localhost:8055 --force
+
+# Remote instance
+node scripts/translate_food_pantries.js --target https://example.com --token <static-token>
+node scripts/translate_food_pantries.js --target https://example.com --token <static-token> --force
 ```
 
+| Flag | Description |
+|---|---|
+| `--target <url>` | **(required)** Directus instance URL |
+| `--token <token>` | Static token (defaults to `D7_DIRECTUS_STATIC_TOKEN` from `d7.env`) |
+| `--force` | Re-translate all records, ignoring `lastUpdated` |
+
 Requires:
-- Directus running with a static token configured
 - LibreTranslate running (default: `http://localhost:5000`)
 - Languages populated in the `languages` collection
 
@@ -91,7 +101,32 @@ Exports the full Directus schema (collections, fields, relations) to `d7/snapsho
 yarn export:schema
 ```
 
-Both should be run before committing changes to flows or the data model.
+### `import_flows.js` — Import Directus Flows
+
+Imports flows from `d7/flows.json` into a Directus instance. Skips flows that already exist (by ID or name). Creates operations and wires up the resolve/reject chains.
+
+```bash
+# Import to local (token from d7.env)
+node scripts/import_flows.js --target http://localhost:8055
+
+# Import to remote
+node scripts/import_flows.js --target https://example.com --token <static-token>
+
+# Dry run
+node scripts/import_flows.js --target https://example.com --token <static-token> --dry-run
+
+# Import specific flow by name
+node scripts/import_flows.js --target https://example.com --token <static-token> --flow "Dump Open"
+```
+
+| Flag | Description |
+|---|---|
+| `--target <url>` | Directus instance URL (defaults to `http://localhost:8055`) |
+| `--token <token>` | Static token (defaults to `D7_DIRECTUS_STATIC_TOKEN` from `d7.env`) |
+| `--flow <name>` | Only import flows matching this name (case-insensitive partial match) |
+| `--dry-run` | Preview what would be imported without making changes |
+
+Export and import should be run before and after committing changes to flows or the data model.
 
 ## Environment Variables
 

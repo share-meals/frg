@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const path = require('path');
 const dotenv = require('dotenv');
 const showdown = require('showdown');
@@ -6,18 +7,44 @@ const TurndownService = require('turndown');
 
 dotenv.config({ path: path.join(__dirname, '../env/d7.env') });
 
-const DIRECTUS_URL = 'http://localhost:8055';
+// CLI args
+const args = process.argv.slice(2);
+function getArg(flag) {
+    const i = args.indexOf(flag);
+    return i >= 0 ? args[i + 1] : null;
+}
+
+const DIRECTUS_URL = getArg('--target');
+const STATIC_TOKEN = getArg('--token') || process.env.D7_DIRECTUS_STATIC_TOKEN;
+const FORCE = args.includes('--force');
+
+if (!DIRECTUS_URL) {
+    console.log('Usage: node scripts/translate_food_pantries.js --target <directus-url> [options]\n');
+    console.log('Required:');
+    console.log('  --target <url>    Directus instance URL (e.g. http://localhost:8055)');
+    console.log('\nOptions:');
+    console.log('  --token <token>   Static token (defaults to D7_DIRECTUS_STATIC_TOKEN from d7.env)');
+    console.log('  --force           Re-translate all records, ignoring lastUpdated');
+    process.exit(1);
+}
+
+if (!STATIC_TOKEN) {
+    console.error('Error: token is required (--token or D7_DIRECTUS_STATIC_TOKEN in d7.env)');
+    process.exit(1);
+}
+
 const LIBRETRANSLATE_URL = process.env.LIBRETRANSLATE_URL || 'http://localhost:5000';
 const LIBRETRANSLATE_API_KEY = process.env.LIBRETRANSLATE_API_KEY || '';
 const BATCH_SIZE = 50;
-const FORCE = process.argv.includes('--force');
 
 const mdToHtml = new showdown.Converter();
 const htmlToMd = new TurndownService({ bulletListMarker: '-' });
 
 function fetch(url, opts = {}) {
     return new Promise((resolve, reject) => {
-        const req = http.request(url, {
+        const u = new URL(url);
+        const mod = u.protocol === 'https:' ? https : http;
+        const req = mod.request(url, {
             method: opts.method || 'GET',
             headers: opts.headers || {}
         }, res => {
@@ -35,12 +62,6 @@ function fetch(url, opts = {}) {
         if (opts.body) req.write(opts.body);
         req.end();
     });
-}
-
-const STATIC_TOKEN = process.env.D7_DIRECTUS_STATIC_TOKEN;
-if (!STATIC_TOKEN) {
-    console.error('Error: D7_DIRECTUS_STATIC_TOKEN is required in d7.env');
-    process.exit(1);
 }
 
 async function translate(text, targetLang) {
