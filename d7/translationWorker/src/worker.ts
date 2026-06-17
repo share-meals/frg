@@ -10,6 +10,9 @@ const DIRECTUS_URL = process.env.DIRECTUS_URL!;
 const DIRECTUS_TOKEN = process.env.DIRECTUS_STATIC_TOKEN!;
 const LIBRETRANSLATE_URL = process.env.LIBRETRANSLATE_URL!;
 const LIBRETRANSLATE_API_KEY = process.env.LIBRETRANSLATE_API_KEY || '';
+const HEALTHCHECK_URL = process.env.HEALTHCHECK_URL || '';
+
+const UNSUPPORTED_LANGUAGES = new Set(['ht']);
 
 const mdToHtml = new Showdown.Converter();
 const htmlToMd = new TurndownService({ bulletListMarker: '-' });
@@ -84,8 +87,22 @@ async function translateHours(
     return translated;
 }
 
+async function pingHealthcheck(): Promise<void> {
+    if (!HEALTHCHECK_URL) return;
+    try {
+        await axios.get(HEALTHCHECK_URL, { timeout: 5000 });
+    } catch (err) {
+        console.warn(`[${getNow()}] healthcheck ping failed:`, err instanceof Error ? err.message : err);
+    }
+}
+
 async function processJob(job: Job<JobPayload>): Promise<void> {
     const { pantryId, language, name, notes, hours } = job.data;
+
+    if (UNSUPPORTED_LANGUAGES.has(language)) {
+        job.log(`${getNow()} - skipping ${language}: not supported by LibreTranslate`);
+        return;
+    }
 
     job.log(`${getNow()} - translating pantry ${pantryId} to ${language}`);
 
@@ -157,6 +174,7 @@ const worker = new Worker<JobPayload>(
 
 worker.on('completed', (job) => {
     console.log(`[${getNow()}] Completed: ${job.data.pantryId} → ${job.data.language}`);
+    pingHealthcheck();
 });
 
 worker.on('failed', (job, err) => {
