@@ -2,3 +2,4 @@
 data/*
 !data/d7_directus/**/*
 node_modules
+d7/directus/uploads/
