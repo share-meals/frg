@@ -76,11 +76,11 @@ services:
       CACHE_ENABLED: "true"
       CACHE_STORE: "redis"
       REDIS_HOST: d7_redis
-      REDIS_PORT: ${D7_REDIS_PORT}
+      REDIS_PORT: 6379
       PUBLIC_URL: ${D7_DIRECTUS_PUBLIC_URL}
       SECRET: ${D7_DIRECTUS_SECRET}
       WEBSOCKETS_ENABLED: "true"
-      REDIS: "redis://d7_redis:${D7_REDIS_PORT}"
+      REDIS: "redis://d7_redis:6379"
     image: directus/directus:11.5.1
     networks:
       - frg-network
