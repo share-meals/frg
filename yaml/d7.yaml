@@ -1,4 +1,15 @@
 services:
+  d7_redis:
+    container_name: d7_redis
+    image: redis:7.4-alpine
+    networks:
+      - frg-network
+    ports:
+      - "${D7_REDIS_PORT}:6379"
+    restart: always
+    volumes:
+      - d7_redis_data:/data
+
   d7_postgres:
     container_name: d7_postgres
     environment:
@@ -25,7 +36,8 @@ services:
   d7_directus:
     container_name: d7_directus
     depends_on:
-      # - d7_cache
+      d7_redis:
+        condition: service_started
       d7_postgres:
         condition: service_healthy
     environment:
@@ -61,14 +73,14 @@ services:
       EXTENSIONS_AUTO_RELOAD: "true" # only for extensions development
       IMPORT_IP_DENY_LIST: ${D7_DIRECTUS_IMPORT_IP_DENY_LIST}
       KEY: ${D7_DIRECTUS_KEY}
-      REDIS_HOST: mq_redis
-      REDIS_PORT: ${MQ_REDIS_PORT}
+      CACHE_ENABLED: "true"
+      CACHE_STORE: "redis"
+      REDIS_HOST: d7_redis
+      REDIS_PORT: ${D7_REDIS_PORT}
       PUBLIC_URL: ${D7_DIRECTUS_PUBLIC_URL}
       SECRET: ${D7_DIRECTUS_SECRET}
       WEBSOCKETS_ENABLED: "true"
-      # CACHE_ENABLED: "true"
-      # CACHE_STORE: "redis"
-      # REDIS: "redis://cache:6379"
+      REDIS: "redis://d7_redis:${D7_REDIS_PORT}"
     image: directus/directus:11.5.1
     networks:
       - frg-network
@@ -122,6 +134,10 @@ services:
     networks:
       - frg-network
     restart: always
+
+volumes:
+  d7_redis_data:
+    external: false
 
 networks:
   frg-network:
