@@ -1,0 +1,43 @@
+{
+    "name": "directus-extension-upload-to-r2-operation",
+    "description": "directus extension to allow uploading data to Cloudflare R2 as part of a workflow",
+    "icon": "extension",
+    "version": "1.0.0",
+    "keywords": [
+        "directus",
+        "directus-extension",
+        "directus-extension-operation"
+    ],
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "directus:extension": {
+        "type": "operation",
+        "path": {
+            "app": "dist/app.js",
+            "api": "dist/api.js"
+        },
+        "source": {
+            "app": "src/app.ts",
+            "api": "src/api.ts"
+        },
+        "host": "^10.10.0"
+    },
+    "scripts": {
+        "build": "directus-extension build",
+        "dev": "directus-extension build -w --no-minify",
+        "link": "directus-extension link"
+    },
+    "devDependencies": {
+        "@directus/extensions-sdk": "^12.0.0",
+        "@types/node": "^20.14.9",
+        "typescript": "^5.5.2",
+        "vue": "^3.4.31"
+    },
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.606.0",
+        "@peculiar/webcrypto": "^1.5.0"
+    },
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
