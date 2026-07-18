@@ -130,16 +130,56 @@ Export and import should be run before and after committing changes to flows or 
 
 ## Environment Variables
 
-All set in `env/d7.env`:
+All set in `env/d7.env`. See `env/d7.env.template` for the full annotated list.
+
+### Postgres
 
 | Variable | Description |
 |---|---|
 | `D7_POSTGRES_DB` | PostgreSQL database name |
 | `D7_POSTGRES_USER` | PostgreSQL user |
+
+### Directus tokens
+
+| Variable | Description |
+|---|---|
+| `D7_DIRECTUS_STATIC_TOKEN` | Static token for the Directus admin user. Used by the bulk translation script and other tooling. |
+| `D7_TRANSLATION_WORKER_TOKEN` | Scoped token for the `translation-worker` service user. Used by the `d7TranslationWorker` runtime — do not use for one-off scripts. |
+
+### Backups (AWS S3)
+
+| Variable | Description |
+|---|---|
 | `BACKUP_BUCKET_NAME` | S3 bucket for storing backups |
 | `BACKUP_REGION` | AWS region for the S3 bucket |
 | `D7_DIRECTUS_AWS_S3_KEY_ID` | AWS access key ID for S3 |
 | `D7_DIRECTUS_AWS_S3_ACCESS_KEY` | AWS secret access key for S3 |
-| `D7_DIRECTUS_STATIC_TOKEN` | Static API token for Directus admin user |
+
+### Translation
+
+| Variable | Description |
+|---|---|
 | `LIBRETRANSLATE_URL` | LibreTranslate endpoint (default: `http://localhost:5000`) |
 | `LIBRETRANSLATE_API_KEY` | LibreTranslate API key (optional, if auth is required) |
+
+### Message queue (BullMQ)
+
+Used by the `bullmqQueueJob` Directus operation to enqueue translation jobs.
+
+| Variable | Description |
+|---|---|
+| `MQ_REDIS_HOST` | Hostname of the queue Redis (default: `mq_redis` on the shared docker network) |
+| `MQ_REDIS_PORT` | Port (default: `6379`) |
+| `MQ_REDIS_PASSWORD` | Password if the queue Redis has `requirepass` set; empty otherwise |
+
+### Publish target (Cloudflare R2)
+
+Used by the `uploadToR2` Directus operation to write scheduled JSON dumps.
+
+| Variable | Description |
+|---|---|
+| `D7_DIRECTUS_R2_ENDPOINT` | R2 S3 endpoint (`https://<account_id>.r2.cloudflarestorage.com`) |
+| `D7_DIRECTUS_R2_ACCESS_KEY_ID` | R2 API token — access key ID |
+| `D7_DIRECTUS_R2_SECRET_ACCESS_KEY` | R2 API token — secret |
+| `D7_DIRECTUS_R2_BUCKET` | Bucket name (e.g. `cfam-public`) |
+| `D7_DIRECTUS_R2_PUBLIC_BASE_URL` | Public URL that CH Map fetches from (e.g. `https://files.cfamhub.org`) |

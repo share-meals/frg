@@ -32,7 +32,7 @@ See [this GitHub issue](https://github.com/keycloak/keycloak/issues/14258) for t
 Create a Google app with redirect URI:
 
 ```
-http://localhost:8080/realms/master/broker/google/endpoint
+http://localhost:8123/realms/master/broker/google/endpoint
 ```
 
 ### 3. Disable automatic user creation
@@ -69,8 +69,10 @@ Reference: [Keycloak docs — Creating Users](https://www.keycloak.org/docs/late
 
 ## Reference URLs
 
+Port comes from `AUTH_KEYCLOAK_HOSTNAME_PORT` in `env/auth.env` (default `8123`).
+
 | Resource | URL |
 |---|---|
-| Admin dashboard | http://localhost:8080/admin/ |
-| User dashboard | http://localhost:8080/realms/master/account/#/ |
-| Well-known config | http://localhost:8080/realms/master/.well-known/openid-configuration |
+| Admin dashboard | http://localhost:8123/admin/ |
+| User dashboard | http://localhost:8123/realms/master/account/#/ |
+| Well-known config | http://localhost:8123/realms/master/.well-known/openid-configuration |
