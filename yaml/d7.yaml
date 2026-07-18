@@ -77,6 +77,9 @@ services:
       CACHE_STORE: "redis"
       REDIS_HOST: d7_redis
       REDIS_PORT: 6379
+      MQ_REDIS_HOST: ${MQ_REDIS_HOST}
+      MQ_REDIS_PORT: ${MQ_REDIS_PORT}
+      MQ_REDIS_PASSWORD: ${MQ_REDIS_PASSWORD}
       PUBLIC_URL: ${D7_DIRECTUS_PUBLIC_URL}
       SECRET: ${D7_DIRECTUS_SECRET}
       WEBSOCKETS_ENABLED: "true"
@@ -141,4 +144,5 @@ volumes:
 
 networks:
   frg-network:
-    driver: bridge
+    name: frg-shared
+    external: true
