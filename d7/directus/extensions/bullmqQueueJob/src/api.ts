@@ -11,8 +11,9 @@ export default defineOperationApi<Options>({
   id: 'operation-queue-bullmq-job',
   handler: async ({config}, {data, env}) => {
     const connection = new Redis({
-      host: env.REDIS_HOST,
-      port: env.REDIS_PORT
+      host: env.MQ_REDIS_HOST ?? '127.0.0.1',
+      port: Number(env.MQ_REDIS_PORT ?? 6379),
+      password: env.MQ_REDIS_PASSWORD || undefined,
     });
     const queue = new Queue(data.$last.queue, {connection});
     const job = await queue.add(data.$last.name, data.$last.payload);
