@@ -14,6 +14,11 @@ const HEALTHCHECK_URL = process.env.HEALTHCHECK_URL || '';
 
 const UNSUPPORTED_LANGUAGES = new Set(['ht']);
 
+// Directus stores clean language codes; LibreTranslate needs script-specific codes.
+const LIBRETRANSLATE_LANGUAGE_ALIASES = new Map<string, string>([
+    ['zh', 'zh-Hans'],
+]);
+
 const mdToHtml = new Showdown.Converter();
 const htmlToMd = new TurndownService({ bulletListMarker: '-' });
 
@@ -46,7 +51,7 @@ async function translate(text: string, targetLang: string): Promise<string> {
     const body: Record<string, string> = {
         q: text,
         source: 'en',
-        target: targetLang,
+        target: LIBRETRANSLATE_LANGUAGE_ALIASES.get(targetLang) ?? targetLang,
     };
     if (LIBRETRANSLATE_API_KEY) body.api_key = LIBRETRANSLATE_API_KEY;
 
@@ -59,7 +64,7 @@ async function translateMarkdown(md: string, targetLang: string): Promise<string
     const body: Record<string, string> = {
         q: html,
         source: 'en',
-        target: targetLang,
+        target: LIBRETRANSLATE_LANGUAGE_ALIASES.get(targetLang) ?? targetLang,
         format: 'html',
     };
     if (LIBRETRANSLATE_API_KEY) body.api_key = LIBRETRANSLATE_API_KEY;
