@@ -27,7 +27,7 @@ services:
       - frg-network
     platform: linux/amd64
     ports:
-      - "${D7_POSTGRES_PORT}:5432"
+      - "${D7_POSTGRES_PORT_PUBLISH:-${D7_POSTGRES_PORT}:5432}"
     volumes:
       - ../data/d7_postgres/config:/db_config
       - ../data/d7_postgres/data:/var/lib/postgresql/data

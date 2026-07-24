@@ -7,7 +7,7 @@ services:
     networks:
       - frg-network
     ports:
-      - "${MQ_REDIS_PORT}:6379"
+      - "${MQ_REDIS_PORT_PUBLISH:-${MQ_REDIS_PORT}:6379}"
     restart: always
     volumes:
       - redis_db_data:/data/mq_redis
@@ -27,7 +27,7 @@ services:
     networks:
       - frg-network
     ports:
-      - "${MQ_BULLBOARD_PORT}:3000"
+      - "${MQ_BULLBOARD_PORT_PUBLISH:-${MQ_BULLBOARD_PORT}:3000}"
     restart: always
 
   mq_healthcheck:
