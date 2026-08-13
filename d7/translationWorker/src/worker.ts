@@ -12,12 +12,13 @@ const LIBRETRANSLATE_URL = process.env.LIBRETRANSLATE_URL!;
 const LIBRETRANSLATE_API_KEY = process.env.LIBRETRANSLATE_API_KEY || '';
 const HEALTHCHECK_URL = process.env.HEALTHCHECK_URL || '';
 
+// Languages LibreTranslate cannot translate — worker no-ops the job.
+// TODO: revisit `ht` (Haitian Creole) if we plug in a second MT provider.
 const UNSUPPORTED_LANGUAGES = new Set(['ht']);
 
-// Directus stores clean language codes; LibreTranslate needs script-specific codes.
-const LIBRETRANSLATE_LANGUAGE_ALIASES = new Map<string, string>([
-    ['zh', 'zh-Hans'],
-]);
+// Reserved for cases where Directus's code and LibreTranslate's code diverge.
+// Currently empty — Directus stores `zh-Hans` / `zh-Hant` directly.
+const LIBRETRANSLATE_LANGUAGE_ALIASES = new Map<string, string>();
 
 const mdToHtml = new Showdown.Converter();
 const htmlToMd = new TurndownService({ bulletListMarker: '-' });
