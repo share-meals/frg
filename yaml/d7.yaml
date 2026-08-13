@@ -6,7 +6,7 @@ services:
       - frg-network
     ports:
       - "${D7_REDIS_PORT}:6379"
-    restart: always
+    restart: unless-stopped
     volumes:
       - d7_redis_data:/data
 
@@ -28,6 +28,7 @@ services:
     platform: linux/amd64
     ports:
       - "${D7_POSTGRES_PORT_PUBLISH:-${D7_POSTGRES_PORT}:5432}"
+    restart: unless-stopped
     volumes:
       - ../data/d7_postgres/config:/db_config
       - ../data/d7_postgres/data:/var/lib/postgresql/data
@@ -94,6 +95,7 @@ services:
       - frg-network
     ports:
       - "${D7_DIRECTUS_PORT}:8055"
+    restart: unless-stopped
     volumes:
       - ../d7/directus/uploads:/directus/uploads
       - ../d7/directus/extensions:/directus/extensions
@@ -141,7 +143,7 @@ services:
         done
     networks:
       - frg-network
-    restart: always
+    restart: unless-stopped
 
 volumes:
   d7_redis_data:
