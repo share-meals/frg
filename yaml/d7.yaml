@@ -76,6 +76,7 @@ services:
       KEY: ${D7_DIRECTUS_KEY}
       CACHE_ENABLED: "true"
       CACHE_STORE: "redis"
+      CACHE_AUTO_PURGE: "true"
       REDIS_HOST: d7_redis
       REDIS_PORT: 6379
       MQ_REDIS_HOST: ${MQ_REDIS_HOST}
