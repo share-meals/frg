@@ -169,6 +169,9 @@ async function processJob(job: Job<JobPayload>): Promise<void> {
 const connection = new Redis({
     host: process.env.MQ_HOST,
     port: Number(process.env.MQ_PORT),
+    // Matches MQ_REDIS_PASSWORD on the bullmqQueueJob extension side. Empty
+    // unless the queue Redis is started with `requirepass`.
+    password: process.env.MQ_PASSWORD || undefined,
     maxRetriesPerRequest: null,
 });
 

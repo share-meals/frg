@@ -1,4 +1,5 @@
 **/.DS_Store
+*.dtmp
 data/*
 !data/d7_directus/**/*
 node_modules
