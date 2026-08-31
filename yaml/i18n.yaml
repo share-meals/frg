@@ -3,14 +3,16 @@ services:
     container_name: i18n_libretranslate
     image: libretranslate/libretranslate:latest
     restart: unless-stopped
+    # I18N_LT_PORT is the host-side port only; LibreTranslate always listens on
+    # 5000 inside the container.
     ports:
       - "${I18N_LT_PORT}:5000"
     expose:
-      - ${I18N_LT_PORT}
+      - 5000
     environment:
       ARGOS_DEBUG: ${I18N_LT_ARGOS_DEBUG}
       LT_DEBUG: ${I18N_LT_DEBUG}
-      LT_PORT: ${I18N_LT_PORT}
+      LT_PORT: 5000
       LT_LOAD_ONLY: ${I18N_LT_LOAD_ONLY}
       LT_DISABLE_WEB_UI: ${I18N_LT_DISABLE_WEB_UI}
       LT_METRICS: ${I18N_LT_METRICS}
