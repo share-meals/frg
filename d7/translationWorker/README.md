@@ -39,6 +39,7 @@ yarn start
 | `LIBRETRANSLATE_API_KEY` | LibreTranslate API key (optional) |
 | `MQ_HOST` | Redis (BullMQ) host |
 | `MQ_PORT` | Redis (BullMQ) port |
+| `MQ_PASSWORD` | Redis password. Only needed if the queue Redis runs with `requirepass`; corresponds to `MQ_REDIS_PASSWORD` on the Directus side |
 | `HEALTHCHECK_URL` | Optional healthchecks.io ping URL — hit on each successful job |
 
 ## Monitoring
