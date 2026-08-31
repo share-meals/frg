@@ -1,7 +1,7 @@
 [
   {
     "id": "18e2267d-34d0-4e71-9686-c740b01bf571",
-    "name": "Queue Job ▸ Enqueue helper",
+    "name": "Queue Job",
     "icon": "flowsheet",
     "color": null,
     "description": "queue a translation job in mq",
@@ -14,14 +14,6 @@
     "operation": "a4d87c59-b933-40df-9067-c1a467bf6d5e",
     "date_created": "2025-01-19T01:22:19.844Z",
     "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 1,
-    "flow_manager_last_run_at": "2026-07-18T02:24:57",
-    "flow_manager_run_counter": 8151,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 10,
-    "flow_manager_error_counter": 0,
     "operations": [
       {
         "id": "a4d87c59-b933-40df-9067-c1a467bf6d5e",
@@ -35,156 +27,6 @@
         "reject": null,
         "flow": "18e2267d-34d0-4e71-9686-c740b01bf571",
         "date_created": "2025-01-27T03:10:26.709Z",
-        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
-      }
-    ]
-  },
-  {
-    "id": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-    "name": "Sync Last Attempted Verify",
-    "icon": "watch",
-    "color": "#6644FF",
-    "description": null,
-    "status": "active",
-    "trigger": "event",
-    "accountability": null,
-    "options": {
-      "type": "action",
-      "scope": [
-        "items.create"
-      ],
-      "collections": [
-        "updateCrewLogs"
-      ]
-    },
-    "operation": "ee7567b9-cd96-4673-9c3c-7b335fe8206f",
-    "date_created": "2025-03-03T03:37:32.766Z",
-    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 2,
-    "flow_manager_last_run_at": null,
-    "flow_manager_run_counter": 0,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 0,
-    "flow_manager_error_counter": 0,
-    "operations": [
-      {
-        "id": "2d84dac1-dd2f-47d3-a5c6-fccc5fdbd1b6",
-        "name": "Update Data",
-        "key": "item_update_nc5h2",
-        "type": "item-update",
-        "position_x": 94,
-        "position_y": 13,
-        "options": {
-          "payload": {
-            "lastVerified": "{{timestamp}}"
-          },
-          "collection": "foodPantries",
-          "query": {
-            "filter": {
-              "id": {
-                "_eq": "{{$trigger.payload.foodPantry}}"
-              }
-            }
-          },
-          "permissions": "$full"
-        },
-        "resolve": null,
-        "reject": null,
-        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-        "date_created": "2025-03-04T19:16:50.504Z",
-        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
-      },
-      {
-        "id": "33a970f5-87f5-4673-83d7-a88be0c8151a",
-        "name": "Condition",
-        "key": "is_food_pantry_logged",
-        "type": "condition",
-        "position_x": 37,
-        "position_y": 1,
-        "options": {
-          "filter": {
-            "$trigger": {
-              "payload": {
-                "foodPantry": {
-                  "_null": true
-                }
-              }
-            }
-          }
-        },
-        "resolve": null,
-        "reject": "bb74c235-deb9-4a48-9b2e-9806e5df94f7",
-        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-        "date_created": "2025-03-04T14:55:59.577Z",
-        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
-      },
-      {
-        "id": "b19dc452-0126-4817-82eb-3877fea3b878",
-        "name": "Condition",
-        "key": "is_food_pantry__call_verified",
-        "type": "condition",
-        "position_x": 76,
-        "position_y": 14,
-        "options": {
-          "filter": {
-            "$trigger": {
-              "payload": {
-                "level": {
-                  "_eq": "verified"
-                }
-              }
-            }
-          }
-        },
-        "resolve": "2d84dac1-dd2f-47d3-a5c6-fccc5fdbd1b6",
-        "reject": null,
-        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-        "date_created": "2025-03-04T19:16:50.519Z",
-        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
-      },
-      {
-        "id": "bb74c235-deb9-4a48-9b2e-9806e5df94f7",
-        "name": "Update Data",
-        "key": "item_update_mn8uk",
-        "type": "item-update",
-        "position_x": 56,
-        "position_y": 15,
-        "options": {
-          "collection": "foodPantries",
-          "payload": {
-            "lastAttemptedVerify": "{{timestamp}}"
-          },
-          "query": {
-            "filter": {
-              "id": {
-                "_eq": "{{$trigger.payload.foodPantry}}"
-              }
-            }
-          },
-          "permissions": "$full"
-        },
-        "resolve": "b19dc452-0126-4817-82eb-3877fea3b878",
-        "reject": null,
-        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-        "date_created": "2025-03-04T14:55:59.570Z",
-        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
-      },
-      {
-        "id": "ee7567b9-cd96-4673-9c3c-7b335fe8206f",
-        "name": "inject timestamp",
-        "key": "timestamp",
-        "type": "exec",
-        "position_x": 19,
-        "position_y": 1,
-        "options": {
-          "code": "module.exports = async function(data) {\n\treturn (new Date()).toISOString();\n}"
-        },
-        "resolve": "33a970f5-87f5-4673-83d7-a88be0c8151a",
-        "reject": null,
-        "flow": "384eeae1-3ea8-4034-bb1f-91f7d3209ec7",
-        "date_created": "2025-03-04T14:48:18.498Z",
         "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       }
     ]
@@ -208,16 +50,8 @@
       ]
     },
     "operation": "5839adf4-1601-4394-beaa-16d049f3eee8",
-    "date_created": "2026-04-02T19:18:33.504Z",
-    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-    "flow_manager_category": null,
-    "flow_manager_order": 3,
-    "flow_manager_last_run_at": "2026-07-18T02:24:59",
-    "flow_manager_run_counter": 1526,
-    "flow_manager_last_run_message": "no translatable fields changed",
-    "flow_manager_last_run_operation": "9ac5081f-3a1c-4323-bc3f-e872fce8ba8b",
-    "flow_manager_success_counter": 4,
-    "flow_manager_error_counter": 10,
+    "date_created": "2026-07-24T18:41:21.958Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
     "operations": [
       {
         "id": "2325a4db-032f-4155-9cad-ae97c5ba9515",
@@ -233,8 +67,8 @@
         "resolve": null,
         "reject": null,
         "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
-        "date_created": "2026-04-02T19:33:59.745Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:22.078Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "52d7833b-7c1c-48e5-9031-2691451d504c",
@@ -249,8 +83,8 @@
         "resolve": "2325a4db-032f-4155-9cad-ae97c5ba9515",
         "reject": null,
         "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
-        "date_created": "2026-04-02T19:18:33.696Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:22.199Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "5839adf4-1601-4394-beaa-16d049f3eee8",
@@ -280,8 +114,8 @@
         "resolve": "9ac5081f-3a1c-4323-bc3f-e872fce8ba8b",
         "reject": null,
         "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
-        "date_created": "2026-04-02T19:18:33.582Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:22.304Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "5ba4eb2d-2256-4e19-b493-d4cad9e5e634",
@@ -308,8 +142,8 @@
         "resolve": "52d7833b-7c1c-48e5-9031-2691451d504c",
         "reject": null,
         "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
-        "date_created": "2026-04-02T19:18:33.669Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:22.407Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "9ac5081f-3a1c-4323-bc3f-e872fce8ba8b",
@@ -324,8 +158,8 @@
         "resolve": "5ba4eb2d-2256-4e19-b493-d4cad9e5e634",
         "reject": null,
         "flow": "58003834-ac8d-4159-965a-61ea96cf5ec2",
-        "date_created": "2026-04-02T19:18:33.632Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:22.510Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       }
     ]
   },
@@ -347,14 +181,6 @@
     "operation": "a50114a3-288a-477b-b05f-fe3bda54ae6e",
     "date_created": "2025-01-19T01:22:20.117Z",
     "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 4,
-    "flow_manager_last_run_at": null,
-    "flow_manager_run_counter": 0,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 0,
-    "flow_manager_error_counter": 0,
     "operations": [
       {
         "id": "5b77ddc9-762e-4cd6-b2ae-053481d107ac",
@@ -411,16 +237,8 @@
       "requireSelection": false
     },
     "operation": "66d4576d-1960-4a12-b4e9-343ea31bfed5",
-    "date_created": "2026-04-02T19:05:21.421Z",
-    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-    "flow_manager_category": null,
-    "flow_manager_order": 5,
-    "flow_manager_last_run_at": "2026-07-18T03:06:14",
-    "flow_manager_run_counter": 6,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 5,
-    "flow_manager_error_counter": 0,
+    "date_created": "2026-07-24T18:41:23.142Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
     "operations": [
       {
         "id": "2d17f32c-5e20-4c89-a141-d55e2f575e76",
@@ -436,8 +254,8 @@
         "resolve": null,
         "reject": null,
         "flow": "75ae13e0-5dbb-4b24-9896-84fba30fff98",
-        "date_created": "2026-04-02T19:05:21.508Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:23.251Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "66d4576d-1960-4a12-b4e9-343ea31bfed5",
@@ -459,8 +277,8 @@
         "resolve": "2d17f32c-5e20-4c89-a141-d55e2f575e76",
         "reject": null,
         "flow": "75ae13e0-5dbb-4b24-9896-84fba30fff98",
-        "date_created": "2026-04-02T19:05:21.470Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:23.356Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       }
     ]
   },
@@ -475,16 +293,8 @@
     "accountability": "all",
     "options": {},
     "operation": "395d8aee-34f6-4048-8132-e81a1c5e1a42",
-    "date_created": "2025-04-08T21:09:12.172Z",
+    "date_created": "2026-07-24T18:49:24.436Z",
     "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 6,
-    "flow_manager_last_run_at": "2026-07-18T03:06:14",
-    "flow_manager_run_counter": 83,
-    "flow_manager_last_run_message": "A023E59CFFFF0000:error:0A0003FC:SSL routines:ssl3_read_bytes:sslv3 alert bad record mac:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1605:SSL alert number 20\n",
-    "flow_manager_last_run_operation": "2e835633-7f3b-4604-9263-f200d9c39291",
-    "flow_manager_success_counter": 1,
-    "flow_manager_error_counter": 16,
     "operations": [
       {
         "id": "2e835633-7f3b-4604-9263-f200d9c39291",
@@ -497,8 +307,8 @@
         "resolve": null,
         "reject": null,
         "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
-        "date_created": "2026-07-18T03:00:34.195Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:49:24.545Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "395d8aee-34f6-4048-8132-e81a1c5e1a42",
@@ -526,7 +336,7 @@
         "resolve": "f21b2ff0-68b2-4d08-8046-2c9b5c0f2027",
         "reject": null,
         "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
-        "date_created": "2025-04-08T21:12:07.492Z",
+        "date_created": "2026-07-24T18:49:24.642Z",
         "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
@@ -542,7 +352,7 @@
         "resolve": "2e835633-7f3b-4604-9263-f200d9c39291",
         "reject": null,
         "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
-        "date_created": "2026-01-05T21:42:57.819Z",
+        "date_created": "2026-07-24T18:49:24.750Z",
         "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
@@ -558,7 +368,7 @@
         "resolve": "5dab52f6-9540-41a9-8174-e4635b2b34be",
         "reject": null,
         "flow": "7a33b3f0-ddbb-4af2-a85f-2737ed4b1d60",
-        "date_created": "2025-04-08T21:12:07.459Z",
+        "date_created": "2026-07-24T18:49:24.860Z",
         "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       }
     ]
@@ -578,14 +388,6 @@
     "operation": "77e85902-3abf-42e5-9964-80748ef54c5a",
     "date_created": "2025-01-19T01:22:20.271Z",
     "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 7,
-    "flow_manager_last_run_at": null,
-    "flow_manager_run_counter": 0,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 0,
-    "flow_manager_error_counter": 0,
     "operations": [
       {
         "id": "389936ae-e4ba-4a99-87b5-19bbc0739851",
@@ -830,16 +632,8 @@
       "cron": "0 0 * * 0"
     },
     "operation": "61276b08-96f8-48d8-91fc-e9c19b026d23",
-    "date_created": "2026-04-02T01:13:12.689Z",
-    "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-    "flow_manager_category": null,
-    "flow_manager_order": 8,
-    "flow_manager_last_run_at": null,
-    "flow_manager_run_counter": 0,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 0,
-    "flow_manager_error_counter": 0,
+    "date_created": "2026-07-24T18:41:23.750Z",
+    "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
     "operations": [
       {
         "id": "312b388a-be32-4508-92b0-8b4b34719feb",
@@ -855,8 +649,8 @@
         "resolve": null,
         "reject": null,
         "flow": "c912465d-74b5-4575-9a22-a87cf01b6756",
-        "date_created": "2026-04-02T01:45:47.662Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:23.861Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       },
       {
         "id": "61276b08-96f8-48d8-91fc-e9c19b026d23",
@@ -878,8 +672,8 @@
         "resolve": "312b388a-be32-4508-92b0-8b4b34719feb",
         "reject": null,
         "flow": "c912465d-74b5-4575-9a22-a87cf01b6756",
-        "date_created": "2026-04-02T01:45:47.625Z",
-        "user_created": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        "date_created": "2026-07-24T18:41:23.965Z",
+        "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab"
       }
     ]
   },
@@ -902,14 +696,6 @@
     "operation": "fd8920f0-e4ec-4c11-a5a3-57a984e2f816",
     "date_created": "2025-01-27T00:29:17.768Z",
     "user_created": "720f01fd-c5b2-4e76-aa20-2c7434d266ab",
-    "flow_manager_category": null,
-    "flow_manager_order": 9,
-    "flow_manager_last_run_at": null,
-    "flow_manager_run_counter": 0,
-    "flow_manager_last_run_message": "",
-    "flow_manager_last_run_operation": "",
-    "flow_manager_success_counter": 0,
-    "flow_manager_error_counter": 0,
     "operations": [
       {
         "id": "fd8920f0-e4ec-4c11-a5a3-57a984e2f816",

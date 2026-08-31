@@ -194,30 +194,6 @@ collections:
       versioning: false
     schema:
       name: templates
-  - collection: updateCrewLogs
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: updateCrewLogs
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: null
-      item_duplication_fields: null
-      note: null
-      preview_url: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-      versioning: false
-    schema:
-      name: updateCrewLogs
 fields:
   - collection: communities
     field: id
@@ -456,6 +432,359 @@ fields:
     schema:
       name: translationTargets
       table: communities
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_category
+    type: string
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_category
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_category
+      table: directus_flows
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_order
+    type: integer
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_order
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_order
+      table: directus_flows
+      data_type: integer
+      default_value: 0
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_last_run_at
+    type: dateTime
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_last_run_at
+      group: null
+      hidden: true
+      interface: input-datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_last_run_at
+      table: directus_flows
+      data_type: timestamp without time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_run_counter
+    type: integer
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_run_counter
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_run_counter
+      table: directus_flows
+      data_type: integer
+      default_value: 0
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_last_run_message
+    type: text
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_last_run_message
+      group: null
+      hidden: true
+      interface: input-multiline
+      note: null
+      options:
+        softLength: 1024
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_last_run_message
+      table: directus_flows
+      data_type: text
+      default_value: ''
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_last_run_operation
+    type: string
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_last_run_operation
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_last_run_operation
+      table: directus_flows
+      data_type: character varying
+      default_value: ''
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_success_counter
+    type: integer
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_success_counter
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_success_counter
+      table: directus_flows
+      data_type: integer
+      default_value: 0
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_flows
+    field: flow_manager_error_counter
+    type: integer
+    meta:
+      collection: directus_flows
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_error_counter
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_error_counter
+      table: directus_flows
+      data_type: integer
+      default_value: 0
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: directus_settings
+    field: flow_manager_categories
+    type: json
+    meta:
+      collection: directus_settings
+      conditions: null
+      display: null
+      display_options: null
+      field: flow_manager_categories
+      group: null
+      hidden: true
+      interface: input-code
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: flow_manager_categories
+      table: directus_settings
       data_type: json
       default_value: null
       max_length: null
@@ -4182,413 +4511,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: updateCrewLogs
-    field: id
-    type: uuid
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 1
-      special:
-        - uuid
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: updateCrewLogs
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: true
-      is_indexed: false
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: updateCrewLogs
-    field: foodPantry
-    type: uuid
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: related-values
-      display_options:
-        template: '{{name}}'
-      field: foodPantry
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableCreate: false
-        template: '{{name}}'
-      readonly: false
-      required: false
-      sort: 2
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: foodPantry
-      table: updateCrewLogs
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: foodPantries
-      foreign_key_column: id
-  - collection: updateCrewLogs
-    field: socialService
-    type: uuid
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: socialService
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableCreate: false
-        enableLink: true
-        template: '{{name}}'
-      readonly: false
-      required: false
-      sort: 3
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: socialService
-      table: updateCrewLogs
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: socialServices
-      foreign_key_column: id
-  - collection: updateCrewLogs
-    field: retailFoodStore
-    type: uuid
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: retailFoodStore
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableCreate: false
-        enableLink: true
-        template: '{{name}}'
-      readonly: false
-      required: false
-      sort: 4
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: retailFoodStore
-      table: updateCrewLogs
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: retailFoodStores
-      foreign_key_column: id
-  - collection: updateCrewLogs
-    field: timestamp
-    type: dateTime
-    meta:
-      collection: updateCrewLogs
-      conditions:
-        - name: show when id is not null
-          options:
-            includeSeconds: false
-            use24: false
-          rule:
-            _and:
-              - id:
-                  _nnull: true
-      display: null
-      display_options: null
-      field: timestamp
-      group: null
-      hidden: true
-      interface: datetime
-      note: null
-      options:
-        use24: false
-      readonly: true
-      required: false
-      sort: 5
-      special:
-        - date-created
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: timestamp
-      table: updateCrewLogs
-      data_type: timestamp without time zone
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: updateCrewLogs
-    field: user
-    type: uuid
-    meta:
-      collection: updateCrewLogs
-      conditions:
-        - name: hidden on create
-          options:
-            enableCreate: true
-            enableLink: false
-            enableSelect: true
-          rule:
-            _and:
-              - id:
-                  _null: true
-      display: null
-      display_options: null
-      field: user
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableCreate: false
-        template: '{{first_name}}{{last_name}}'
-      readonly: false
-      required: false
-      sort: 6
-      special:
-        - m2o
-        - user-created
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: user
-      table: updateCrewLogs
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_users
-      foreign_key_column: id
-  - collection: updateCrewLogs
-    field: notes
-    type: text
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: notes
-      group: null
-      hidden: false
-      interface: input-multiline
-      note: null
-      options:
-        softLength: 500
-        trim: true
-      readonly: false
-      required: false
-      sort: 7
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: notes
-      table: updateCrewLogs
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: updateCrewLogs
-    field: level
-    type: string
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: level
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - color: '#A2B5CD'
-            icon: add_call
-            text: Attempted
-            value: attempted
-          - color: '#2ECDA7'
-            icon: select_check_box
-            text: Verified
-            value: verified
-      readonly: false
-      required: true
-      sort: 8
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: level
-      table: updateCrewLogs
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: updateCrewLogs
-    field: flag
-    type: string
-    meta:
-      collection: updateCrewLogs
-      conditions: null
-      display: null
-      display_options: null
-      field: flag
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - text: No Followup Needed
-            value: noFollowupNeeded
-          - icon: exclamation
-            text: Followup Needed by Admin
-            value: followupNeeded
-          - icon: select_check_box
-            text: Followed Up by Admin
-            value: followedup
-      readonly: false
-      required: false
-      sort: 9
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: flag
-      table: updateCrewLogs
-      data_type: character varying
-      default_value: noFollowupNeeded
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
 relations:
   - collection: foodPantries_translations
     field: foodPantries_id
@@ -4630,89 +4552,5 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: foodpantries_translations_languages_code_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: updateCrewLogs
-    field: foodPantry
-    related_collection: foodPantries
-    meta:
-      junction_field: null
-      many_collection: updateCrewLogs
-      many_field: foodPantry
-      one_allowed_collections: null
-      one_collection: foodPantries
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: updateCrewLogs
-      column: foodPantry
-      foreign_key_table: foodPantries
-      foreign_key_column: id
-      constraint_name: updatecrewlogs_foodpantry_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: updateCrewLogs
-    field: socialService
-    related_collection: socialServices
-    meta:
-      junction_field: null
-      many_collection: updateCrewLogs
-      many_field: socialService
-      one_allowed_collections: null
-      one_collection: socialServices
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: updateCrewLogs
-      column: socialService
-      foreign_key_table: socialServices
-      foreign_key_column: id
-      constraint_name: updatecrewlogs_socialservice_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: updateCrewLogs
-    field: retailFoodStore
-    related_collection: retailFoodStores
-    meta:
-      junction_field: null
-      many_collection: updateCrewLogs
-      many_field: retailFoodStore
-      one_allowed_collections: null
-      one_collection: retailFoodStores
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: updateCrewLogs
-      column: retailFoodStore
-      foreign_key_table: retailFoodStores
-      foreign_key_column: id
-      constraint_name: updatecrewlogs_retailfoodstore_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: updateCrewLogs
-    field: user
-    related_collection: directus_users
-    meta:
-      junction_field: null
-      many_collection: updateCrewLogs
-      many_field: user
-      one_allowed_collections: null
-      one_collection: directus_users
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: updateCrewLogs
-      column: user
-      foreign_key_table: directus_users
-      foreign_key_column: id
-      constraint_name: updatecrewlogs_user_foreign
       on_update: NO ACTION
       on_delete: SET NULL
