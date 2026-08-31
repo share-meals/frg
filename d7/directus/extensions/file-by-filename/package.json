@@ -1,6 +1,6 @@
 {
 	"name": "file-by-filename",
-	"description": "Please enter a description for your extension",
+	"description": "directus endpoint to look up a file by its filename and redirect to its asset URL",
 	"icon": "extension",
 	"version": "1.0.0",
 	"keywords": [

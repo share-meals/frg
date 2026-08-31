@@ -1,11 +1,21 @@
+const https = require('https');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
 
+// Usage: node scripts/export_flows.js [--target <url>]
+// Defaults to D7_DIRECTUS_PUBLIC_URL from d7.env
+
 dotenv.config({ path: path.join(__dirname, '../env/d7.env') });
 
-const DIRECTUS_URL = 'http://localhost:8055';
+const args = process.argv.slice(2);
+function getArg(flag) {
+    const i = args.indexOf(flag);
+    return i >= 0 ? args[i + 1] : null;
+}
+
+const DIRECTUS_URL = getArg('--target') || process.env.D7_DIRECTUS_PUBLIC_URL || 'http://localhost:8055';
 const STATIC_TOKEN = process.env.D7_DIRECTUS_STATIC_TOKEN;
 
 if (!STATIC_TOKEN) {
@@ -15,7 +25,8 @@ if (!STATIC_TOKEN) {
 
 function fetch(url, headers) {
     return new Promise((resolve, reject) => {
-        const req = http.request(url, { headers }, res => {
+        const mod = new URL(url).protocol === 'https:' ? https : http;
+        const req = mod.request(url, { headers }, res => {
             let data = '';
             res.on('data', c => data += c);
             res.on('end', () => resolve(JSON.parse(data)));
