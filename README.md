@@ -52,7 +52,7 @@ Directus admin lives at `http://localhost:8055`. Bull Board at `http://localhost
 
 | Doc | Covers |
 |---|---|
-| [docs/d7.md](docs/d7.md) | Directus specifics — backups, translations, all five flows, R2 output layout |
+| [docs/d7.md](docs/d7.md) | Directus specifics — backups, translations, all nine flows, R2 output layout |
 | [docs/auth.md](docs/auth.md) | Keycloak setup (Google IDP, no self-signup) |
 | [scripts/README.md](scripts/README.md) | CLI tooling: backups, bulk translation, flow import/export, and the full env-var reference |
 | [d7/translationWorker/README.md](d7/translationWorker/README.md) | The BullMQ worker itself |

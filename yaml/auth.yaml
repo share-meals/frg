@@ -11,7 +11,7 @@ services:
     networks:
       - frg-network
     ports:
-      - "${AUTH_POSTGRES_PORT}:${AUTH_POSTGRES_PORT}"
+      - "${AUTH_POSTGRES_PORT}:5432"
     restart: unless-stopped
     volumes:
       - ../data/auth_postgres:/var/lib/postgresql/data
@@ -38,7 +38,7 @@ services:
       DB_ADDR: auth_postgres
       DB_DATABASE: ${AUTH_POSTGRES_DB}
       DB_USER: ${AUTH_POSTGRES_USER}
-      DB_PASSWORD: ${AUTH_POSTGRES_PASS}
+      DB_PASSWORD: ${AUTH_POSTGRES_PASSWORD}
       KEYCLOAK_ADMIN: ${AUTH_KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${AUTH_KEYCLOAK_ADMIN_PASSWORD}
       KEYCLOAK_HOSTNAME: localhost

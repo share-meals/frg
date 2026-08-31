@@ -1,6 +1,6 @@
 {
 	"name": "saveFile",
-	"description": "Please enter a description for your extension",
+	"description": "directus operation to save the previous step's output into the file library, replacing any file of the same name",
 	"icon": "extension",
 	"version": "1.0.0",
 	"keywords": [

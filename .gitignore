@@ -3,3 +3,6 @@ data/*
 !data/d7_directus/**/*
 node_modules
 d7/directus/uploads/
+
+# Local Claude Code settings — may contain tokens/credentials
+.claude/settings.local.json
